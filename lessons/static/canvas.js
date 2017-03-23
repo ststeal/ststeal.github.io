@@ -70,16 +70,20 @@ mylib.Canvas = decl({
 			this.shapeList.push(arguments[i]);
 		}
 	},
-	popShape: function () {
+	popShapeList: function () {
 		this.shapeList.pop();
 	},
-	resetShape: function () {
+	resetShapeList: function () {
 		this.shapeList = [];
 	},
+	clearCanvas: function () {
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	},
 	render: function () {
-		var context = (document.getElementById(this.id)).getContext('2d');
+		this.canvas = document.getElementById(this.id);
+		this.context = this.canvas.getContext('2d');
 		for (var i = 0; i < this.shapeList.length; i++) {
-			this.shapeList[i].render(context);
+			this.shapeList[i].render(this.context);
 		}
 	},
 	shapes: function () {
@@ -92,29 +96,27 @@ mylib.Canvas = decl({
  * @class Rect
  */
 mylib.Rect = decl({
-		$constructor: function (opts) {
-			this.color = opts.color;
-			this.x = opts.x;
-			this.y = opts.y;
-			this.width = opts.width;
-			this.height = opts.height;
-		},
-		getDefaultOptions: function () {
-			return {
-				color: 'green',
-				x: 0,
-				y: 0,
-				width: 50,
-				height: 50
-			};
-		},
-		render: function (canvas) {
-			canvas.fillStyle = this.color;
-			canvas.fillRect(this.x, this.y, this.width, this.height);
-		}
+	$constructor: function (opts) {
+		this.color = opts.color;
+		this.x = opts.x;
+		this.y = opts.y;
+		this.width = opts.width;
+		this.height = opts.height;
+	},
+	getDefaultOptions: function () {
+		return {
+			color: 'green',
+			x: 0,
+			y: 0,
+			width: 50,
+			height: 50
+		};
+	},
+	render: function (canvas) {
+		canvas.fillStyle = this.color;
+		canvas.fillRect(this.x, this.y, this.width, this.height);
 	}
-);
-
+});
 /**
  * @class Circle
  */
