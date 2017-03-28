@@ -53,6 +53,10 @@ var mylib = {};
  * @class Canvas
  */
 mylib.Canvas = decl({
+	/**
+	 * @constructor
+	 * @param {Object} opts
+	 */
 	$constructor: function (opts) {
 		this.id = opts.id;
 		this.shapeList = [];
@@ -77,11 +81,10 @@ mylib.Canvas = decl({
 		this.shapeList = [];
 	},
 	clearCanvas: function () {
-		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.context.clearRect(0, 0, this.context.width, this.context.height);
 	},
 	render: function () {
-		this.canvas = document.getElementById(this.id);
-		this.context = this.canvas.getContext('2d');
+		this.context = (document.getElementById(this.id)).getContext('2d');
 		for (var i = 0; i < this.shapeList.length; i++) {
 			this.shapeList[i].render(this.context);
 		}
@@ -93,9 +96,26 @@ mylib.Canvas = decl({
 	}
 });
 /**
+ * @class Shape
+ */
+mylib.Shape = decl({
+	$constructor: function () {
+	},
+	render: function () {
+		console.log('render method');
+	},
+	toString: function () {
+		console.log('toString method');
+	}
+});
+/**
  * @class Rect
  */
-mylib.Rect = decl({
+mylib.Rect = decl(mylib.Shape,{
+	/**
+	 * @constructor
+	 * @param {Object} opts
+	 */
 	$constructor: function (opts) {
 		this.color = opts.color;
 		this.x = opts.x;
@@ -112,15 +132,24 @@ mylib.Rect = decl({
 			height: 50
 		};
 	},
-	render: function (canvas) {
-		canvas.fillStyle = this.color;
-		canvas.fillRect(this.x, this.y, this.width, this.height);
+	/**
+	 *
+	 * @param {Object} context
+	 */
+	render: function (context) {
+		//mylib.Shape.super.render.apply(this, arguments);
+		context.fillStyle = this.color;
+		context.fillRect(this.x, this.y, this.width, this.height);
 	}
 });
 /**
  * @class Circle
  */
 mylib.Circle = decl({
+	/**
+	 * @constructor
+	 * @param {Object} opts
+	 */
 	$constructor: function (opts) {
 		this.cx = opts.cx;
 		this.cy = opts.cy;
@@ -135,17 +164,17 @@ mylib.Circle = decl({
 			color: 'red'
 		};
 	},
-	render: function (canvas) {
-		canvas.beginPath();
-		canvas.arc(this.cx, this.cy, this.r, 0, 2 * Math.PI);
-		canvas.lineWidth = 5;
-		canvas.strokeStyle = this.color;
-		canvas.stroke();
-		if (this.textColor) {
-			canvas.fillStyle = this.textColor;
-			canvas.textAlign = 'center';
-			canvas.fillText(this.text, this.cx, this.cy);
-		}
+	/**
+	 *
+	 * @param {Object} context
+	 */
+	render: function (context) {
+		//mylib.Shape.super.render.apply(this, arguments);
+		context.beginPath();
+		context.arc(this.cx, this.cy, this.r, 0, 2 * Math.PI);
+		context.lineWidth = 5;
+		context.strokeStyle = this.color;
+		context.stroke();
 	}
 });
 /**
@@ -153,6 +182,10 @@ mylib.Circle = decl({
  * @extends Circle
  */
 mylib.LabeledCircle = decl(mylib.Circle, {
+	/**
+	 * @constructor
+	 * @param {Object} opts
+	 */
 	$constructor: function (opts) {
 		this.cx = opts.cx;
 		this.cy = opts.cy;
@@ -170,16 +203,15 @@ mylib.LabeledCircle = decl(mylib.Circle, {
 			textColor: 'pink',
 			color: 'yellow'
 		};
-	}
-});
-/**
- * @class Shape
- */
-mylib.Shape = decl({
-	render: function () {
-		console.log('render method');
 	},
-	toString: function () {
-		console.log('toString method');
+	/**
+	 *
+	 * @param {Object} context
+	 */
+	render: function (context) {
+		mylib.LabeledCircle.super.render.apply(this, arguments);
+		context.fillStyle = this.textColor;
+		context.textAlign = 'center';
+		context.fillText(this.text, this.cx, this.cy);
 	}
 });

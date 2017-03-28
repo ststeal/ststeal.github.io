@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <style>
-        body{
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
         }
+
         .canvas_block {
             margin: 0;
             width: 50%;
@@ -15,7 +16,8 @@
             border: solid black 4px;
             box-sizing: border-box;
         }
-        .box{
+
+        .box {
             flex-flow: row wrap;
             width: 100%;
             height: 100%;
@@ -28,10 +30,44 @@
 </head>
 <body>
 <div class="box">
-<canvas id="1" class="canvas_block"></canvas>
-<canvas id="2" class="canvas_block"></canvas>
-<canvas id="3" class="canvas_block"></canvas>
-<canvas id="4" class="canvas_block"></canvas>
+    <canvas id="1" class="canvas_block"></canvas>
+    <canvas id="2" class="canvas_block"></canvas>
+    <canvas id="3" class="canvas_block"></canvas>
+    <canvas id="4" class="canvas_block"></canvas>
 </div>
+<script>
+    var canvas1 = new mylib.Canvas({id: '1'});
+    var canvas2 = new mylib.Canvas({id: '2'});
+    var canvas3 = new mylib.Canvas({id: '3'});
+    var canvas4 = new mylib.Canvas({id: '4'});
+
+    var rect1 = new mylib.Rect({color: 'blue', x: 0, y: 50, width: 50, height: 50});
+    var rect2 = new mylib.Rect({color: 'green', x: 200, y: 50, width: 100, height: 100});
+    var circle1 = new mylib.Circle({cx: 100, cy: 100, color: 'pink'});
+    var labeledCircle1 = new mylib.LabeledCircle({cx: 100, cy: 100, text: 'Первый', textColor: 'blue', color: 'red'});
+    var labeledCircle2 = new mylib.LabeledCircle({cx: 200, cy: 100, text: 'второй', textColor: 'black'});
+    var circle2 = new mylib.Circle({cx: 50, cy: 50, r: 40, color: 'blue'});
+    var circle3 = new mylib.Circle({cx: 110, cy: 50, r: 40, color: 'black'});
+    var circle4 = new mylib.Circle({cx: 170, cy: 50, r: 40, color: 'red'});
+    var circle5 = new mylib.Circle({cx: 80, cy: 100, r: 40, color: 'yellow'});
+    var circle6 = new mylib.Circle({cx: 140, cy: 100, r: 40, color: 'green'});
+    var rect3 = new mylib.Rect({color: 'red', x: 100, y: 20, width: 120, height: 120});
+    var rect4 = new mylib.Rect({color: 'orange', x: 100, y: 20, width: 110, height: 110});
+    var rect5 = new mylib.Rect({color: 'yellow', x: 100, y: 20, width: 100, height: 100});
+    var rect6 = new mylib.Rect({color: 'green', x: 100, y: 20, width: 90, height: 90});
+    var rect7 = new mylib.Rect({color: 'blue', x: 100, y: 20, width: 80, height: 80});
+    var rect8 = new mylib.Rect({color: 'indigo', x: 100, y: 20, width: 70, height: 70});
+    var rect9 = new mylib.Rect({color: 'violet', x: 100, y: 20, width: 60, height: 60});
+
+
+    canvas1.addShape(rect1, rect2, circle1, labeledCircle1);
+    canvas1.render();
+    canvas2.addShape(circle2, circle3, circle4, circle4, circle5, circle6);
+    canvas2.render();
+    canvas3.addShape(labeledCircle2, labeledCircle1);
+    canvas3.render();
+    canvas4.addShape(rect3, rect4, rect5, rect6, rect7, rect8, rect9);
+    canvas4.render();
+</script>
 </body>
 </html>
