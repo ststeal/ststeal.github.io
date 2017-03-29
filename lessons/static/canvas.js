@@ -285,3 +285,4 @@ mylib.LabeledCircle = decl(mylib.Circle, {
 		context.fillText(this.text, this.cx, this.cy);
 	}
 });
+

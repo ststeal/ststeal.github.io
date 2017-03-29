@@ -30,7 +30,6 @@
     </style>
     <meta charset="UTF-8">
     <title>Canvas</title>
-    <script src="./static/canvas.js"></script>
 </head>
 <body>
 <div class="box">
@@ -39,6 +38,7 @@
     <canvas id="3" class="canvas_block"></canvas>
     <canvas id="4" class="canvas_block"></canvas>
 </div>
+<script src="./static/canvas.js"></script>
 <script>
     function stado() {
         docWidth = (document.body).clientWidth / 2;
@@ -51,12 +51,19 @@
         canvas3Dom.height = docHeight;
         canvas4Dom.width = docWidth;
         canvas4Dom.height = docHeight;
-        canvas1.render();
-        canvas2.render();
-        canvas3.render();
-        canvas4.render();
+        canvasArr.forEach(function(canvas){
+            canvas.render();
+        });
     }
 
+    /**
+     * Возвращает новую функцию, которая срабатывает не чаще timeout
+     * @param {Function} fn
+     * @param {Number} timeout
+     * @param {Boolean} [invokeAsap=false] Нужно ли вызывать функцию при первом срабатывании
+     * @param {Object} [ctx]
+     * @returns {Function}
+     */
     function debounce(fn, timeout, invokeAsap, ctx) {
         var timer;
         if (arguments.length === 3 && typeof invokeAsap !== 'boolean') {
@@ -78,6 +85,7 @@
             }, timeout);
         };
     }
+    var canvasArr = [];
     var canvas1Dom = document.getElementById('1');
     var canvas2Dom = document.getElementById('2');
     var canvas3Dom = document.getElementById('3');
@@ -112,7 +120,7 @@
     canvas3.addShape(labeledCircle2, labeledCircle1);
     canvas2.addShape(circle2, circle3, circle4, circle4, circle5, circle6);
     canvas1.addShape(rect1, rect2, circle1, labeledCircle1);
-
+    canvasArr.push(canvas1,canvas2,canvas3,canvas4);
     stado = debounce(stado, 500);
     stado();
     window.addEventListener('resize', function () {
