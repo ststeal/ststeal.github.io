@@ -1,0 +1,88 @@
+body{
+    margin: 0;
+}
+
+.container{
+    display: inline-block;
+    background-color: darkslateblue;
+    color: white;
+    border-radius: 5px;
+    border: solid 2px black;
+    margin: 20px 0  0 20px;
+}
+
+.add{
+    background-color: #FFDB4D;
+    border: solid 2px black;
+    border-radius: 5px;
+    padding: 5px;
+    display: block;
+    margin-left: 20px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background-color: #FFCE26;
+}
+
+.control{
+    color: white;
+    background-color: Darkslateblue;
+    margin-top: 10px;
+    width: 100%;
+    border-top: solid 2px black;
+    display: inline-flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+}
+
+label{
+    margin: 10px 10px 10px 10px;
+}
+
+input{
+    border-radius: 3px;
+    margin-left: 10px;
+    width: 20vw;
+}
+
+.save{
+    cursor: pointer;
+    border: none;
+    border-left: solid 2px black;
+    padding: 10px 20px 10px 20px;
+}
+
+.table{
+    border-collapse: collapse;
+}
+
+tr{
+    cursor: pointer;
+}
+
+tr:hover{
+    background-color: #FFCE26;
+    color: black;
+}
+
+.tr_active{
+    background-color: #FFCE26;
+    color: black;
+}
+
+td{
+    border: solid 2px black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.active_button{
+    background-color: #FFDB4D;
+}
+
+.active:hover{
+    background-color: #FFCE26;
+}
