@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    font: 16px sans-serif;
 }
 
 .container{
@@ -79,7 +80,7 @@ td{
     padding: 10px;
 }
 
-.active_button{
+button:enabled{
     background-color: #FFDB4D;
 }
 

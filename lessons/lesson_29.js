@@ -6,7 +6,7 @@ var data = [{
 }, {
 	id: 2,
 	name: 'Boat',
-	price: 11282,
+	price: 11282.12,
 	count: 6
 }];
 var idIncrement = 3;
@@ -23,8 +23,9 @@ function createTable(container) {
 }
 function generateRowHTML(rowData) {
 	return '<td>' + encode(rowData.name) + '</td>' +
-		'<td>' + encode(rowData.price + '') + '</td>' +
-		'<td>' + encode(rowData.count + '') + '</td>';
+		'<td>' + encode(rowData.price.toFixed(2)) + '</td>' +
+		'<td>' + encode(rowData.count + '') + '</td>' +
+		'<td><button class="delete">Delete</button></td>';
 }
 function appendRow(rowData) {
 	var row = document.createElement('tr');
@@ -48,13 +49,18 @@ function addRow() {
 }
 function getRowDataById(id) {
 	return data.find(function (rowData) {
-		return String(rowData.id) === String(id);
+		return rowData.id === id;
+	});
+}
+function removeRow(id) {
+	data = data.filter(function (rowData) {
+		return rowData.id !== id;
 	});
 }
 function saveData() {
-	editedRowData.name = nameInput.value;
-	editedRowData.price = priceInput.value;
-	editedRowData.count = countInput.value;
+	editedRowData.name = nameInput.value || 'unknown';
+	editedRowData.price = parseFloat(priceInput.value) || 0;
+	editedRowData.count = parseInt(countInput.value) || 0;
 	updateRow(editedRowData);
 	nameInput.value = '';
 	priceInput.value = '';
@@ -63,7 +69,6 @@ function saveData() {
 	priceInput.setAttribute('disabled', '');
 	countInput.setAttribute('disabled', '');
 	saveButton.setAttribute('disabled', '');
-	saveButton.classList.remove('active_button');
 	document.querySelector('.tr_active').classList.remove('tr_active');
 }
 function initEditForm() {
@@ -82,19 +87,24 @@ function startEdit(rowData) {
 	priceInput.removeAttribute('disabled');
 	countInput.removeAttribute('disabled');
 	saveButton.removeAttribute('disabled');
-	saveButton.classList.add('active_button');
 }
 function onTableClick(event) {
-	var rowActive = document.querySelector('.tr_active');
-	if (rowActive) {
-		rowActive.classList.remove('tr_active');
-	}
 	var row = event.target.closest('tr');
 	if (!row) {
 		return;
 	}
+	var id = parseInt(row.dataset.id);
+	var deleteButton = event.target.closest('.delete');
+	if (deleteButton) {
+		row.parentNode.removeChild(row);
+		removeRow(id);
+		return;
+	}
+	var rowActive = document.querySelector('.tr_active');
+	if (rowActive) {
+		rowActive.classList.remove('tr_active');
+	}
 	row.classList.add('tr_active');
-	var id = row.dataset.id;
 	var rowData = getRowDataById(id);
 	startEdit(rowData);
 }
