@@ -57,7 +57,7 @@ var Storage = inherit(EventEmitter, {
 		this._data[index] = obj;
 		this.trigger('update', obj);
 	},
-	get:function (id) {
+	get: function (id) {
 		return this._data.find(function (obj) {
 			return obj.id === id;
 		});
@@ -78,34 +78,41 @@ var data = [{
 	price: 11282.12,
 	count: 6
 }];
+
 var storage;
 var table;
 var nameInput, priceInput, countInput, saveButton;
 var editedRowData;
+
 function encode(str) {
 	return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
+
 function createTable(container) {
 	table = document.createElement('table');
 	table.className = 'table';
 	container.appendChild(table);
 }
+
 function generateRowHTML(rowData) {
 	return '<td>' + encode(rowData.name) + '</td>' +
 		'<td>' + encode(rowData.price.toFixed(2)) + '</td>' +
 		'<td>' + encode(rowData.count + '') + '</td>' +
 		'<td><button class="delete">Delete</button></td>';
 }
+
 function appendRow(rowData) {
 	var row = document.createElement('tr');
 	row.innerHTML = generateRowHTML(rowData);
 	row.setAttribute('data-id', rowData.id);
 	table.appendChild(row);
 }
+
 function updateRow(rowData) {
 	var row = table.querySelector('[data-id="' + rowData.id + '"]');
 	row.innerHTML = generateRowHTML(rowData);
 }
+
 function onAddRow() {
 	var rowData = {
 		name: 'unknown',
@@ -114,10 +121,12 @@ function onAddRow() {
 	};
 	storage.add(rowData);
 }
+
 function removeRow(rowData) {
 	var row = table.querySelector('[data-id="' + rowData.id + '"]');
 	row.parentNode.removeChild(row);
 }
+
 function saveData() {
 	editedRowData.name = nameInput.value || 'unknown';
 	editedRowData.price = parseFloat(priceInput.value) || 0;
@@ -132,6 +141,7 @@ function saveData() {
 	saveButton.setAttribute('disabled', '');
 	document.querySelector('.tr_active').classList.remove('tr_active');
 }
+
 function initEditForm() {
 	nameInput = document.querySelector('.name');
 	priceInput = document.querySelector('.price');
@@ -139,6 +149,7 @@ function initEditForm() {
 	saveButton = document.querySelector('.save');
 	saveButton.addEventListener('click', saveData);
 }
+
 function startEdit(rowData) {
 	editedRowData = rowData;
 	nameInput.value = rowData.name;
@@ -149,6 +160,7 @@ function startEdit(rowData) {
 	countInput.removeAttribute('disabled');
 	saveButton.removeAttribute('disabled');
 }
+
 function onTableClick(event) {
 	var row = event.target.closest('tr');
 	if (!row) {
@@ -168,11 +180,12 @@ function onTableClick(event) {
 	var rowData = storage.get(id);
 	startEdit(rowData);
 }
+
 function init() {
 	storage = new Storage(data);
-	storage.on('add',appendRow);
-	storage.on('update',updateRow);
-	storage.on('remove',removeRow);
+	storage.on('add', appendRow);
+	storage.on('update', updateRow);
+	storage.on('remove', removeRow);
 	createTable(document.querySelector('.container'));
 	storage.forEach(function (rowData) {
 		appendRow(rowData);
@@ -181,4 +194,5 @@ function init() {
 	document.querySelector('.add').addEventListener('click', onAddRow);
 	table.addEventListener('click', onTableClick);
 }
+
 document.addEventListener('DOMContentLoaded', init);
