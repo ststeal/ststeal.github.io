@@ -1,3 +1,5 @@
+/* globals doT */
+
 function EventEmitter() {
 	this._handlers = {};
 }
@@ -67,6 +69,92 @@ var Storage = inherit(EventEmitter, {
 	}
 });
 
+var Table = inherit(EventEmitter, {
+	$constructor: function (container) {
+		EventEmitter.apply(this);
+		this._table = document.createElement('table');
+		this._table.className = 'table';
+		container.appendChild(this._table);
+		this._table.addEventListener('click', this._onTableClick.bind(this));
+		this._template = doT.template(
+			'<td>{{!it.name}}</td>' +
+			'<td>{{!it.price.toFixed(2)}}</td>' +
+			'<td>{{!it.count+""}}</td>' +
+			'<td><button class="delete">Delete</button></td>'
+		);
+	},
+	appendRow: function (rowData) {
+		var row = document.createElement('tr');
+		row.innerHTML = this._generateRowHTML(rowData);
+		row.setAttribute('data-id', rowData.id);
+		this._table.appendChild(row);
+	},
+	updateRow: function (rowData) {
+		var row = this._table.querySelector('[data-id="' + rowData.id + '"]');
+		row.innerHTML = this._generateRowHTML(rowData);
+		this._table.querySelector('.tr_active').classList.remove('tr_active');
+	},
+	removeRow: function (rowData) {
+		var row = this._table.querySelector('[data-id="' + rowData.id + '"]');
+		row.parentNode.removeChild(row);
+	},
+	_generateRowHTML: function (rowData) {
+		return this._template(rowData);
+	},
+	_onTableClick: function (event) {
+		var row = event.target.closest('tr');
+		if (!row) {
+			return;
+		}
+		var id = parseInt(row.dataset.id);
+		var deleteButton = event.target.closest('.delete');
+		if (deleteButton) {
+			this.trigger('remove', id);
+			return;
+		}
+		var rowActive = document.querySelector('.tr_active');
+		if (rowActive) {
+			rowActive.classList.remove('tr_active');
+		}
+		row.classList.add('tr_active');
+		this.trigger('rowClick', id);
+	}
+});
+
+var EditForm = inherit(EventEmitter, {
+	$constructor: function () {
+		EventEmitter.apply(this);
+		this._nameInput = document.querySelector('.name');
+		this._priceInput = document.querySelector('.price');
+		this._countInput = document.querySelector('.count');
+		this._saveButton = document.querySelector('.save');
+		this._saveButton.addEventListener('click', this._saveData.bind(this));
+	},
+	startEdit: function (rowData) {
+		this._editedRowData = rowData;
+		this._nameInput.value = rowData.name;
+		this._priceInput.value = rowData.price;
+		this._countInput.value = rowData.count;
+		this._nameInput.removeAttribute('disabled');
+		this._priceInput.removeAttribute('disabled');
+		this._countInput.removeAttribute('disabled');
+		this._saveButton.removeAttribute('disabled');
+	},
+	_saveData: function () {
+		this._editedRowData.name = this._nameInput.value || 'unknown';
+		this._editedRowData.price = parseFloat(this._priceInput.value) || 0;
+		this._editedRowData.count = parseInt(this._countInput.value) || 0;
+		this._nameInput.value = '';
+		this._priceInput.value = '';
+		this._countInput.value = '';
+		this._nameInput.setAttribute('disabled', '');
+		this._priceInput.setAttribute('disabled', '');
+		this._countInput.setAttribute('disabled', '');
+		this._saveButton.setAttribute('disabled', '');
+		this.trigger('save', this._editedRowData);
+	}
+});
+
 var data = [{
 	id: 1,
 	name: 'Hammer',
@@ -79,120 +167,28 @@ var data = [{
 	count: 6
 }];
 
-var storage;
-var table;
-var nameInput, priceInput, countInput, saveButton;
-var editedRowData;
-
-function encode(str) {
-	return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function createTable(container) {
-	table = document.createElement('table');
-	table.className = 'table';
-	container.appendChild(table);
-}
-
-function generateRowHTML(rowData) {
-	return '<td>' + encode(rowData.name) + '</td>' +
-		'<td>' + encode(rowData.price.toFixed(2)) + '</td>' +
-		'<td>' + encode(rowData.count + '') + '</td>' +
-		'<td><button class="delete">Delete</button></td>';
-}
-
-function appendRow(rowData) {
-	var row = document.createElement('tr');
-	row.innerHTML = generateRowHTML(rowData);
-	row.setAttribute('data-id', rowData.id);
-	table.appendChild(row);
-}
-
-function updateRow(rowData) {
-	var row = table.querySelector('[data-id="' + rowData.id + '"]');
-	row.innerHTML = generateRowHTML(rowData);
-}
-
-function onAddRow() {
-	var rowData = {
-		name: 'unknown',
-		price: 0,
-		count: 0
-	};
-	storage.add(rowData);
-}
-
-function removeRow(rowData) {
-	var row = table.querySelector('[data-id="' + rowData.id + '"]');
-	row.parentNode.removeChild(row);
-}
-
-function saveData() {
-	editedRowData.name = nameInput.value || 'unknown';
-	editedRowData.price = parseFloat(priceInput.value) || 0;
-	editedRowData.count = parseInt(countInput.value) || 0;
-	storage.update(editedRowData);
-	nameInput.value = '';
-	priceInput.value = '';
-	countInput.value = '';
-	nameInput.setAttribute('disabled', '');
-	priceInput.setAttribute('disabled', '');
-	countInput.setAttribute('disabled', '');
-	saveButton.setAttribute('disabled', '');
-	document.querySelector('.tr_active').classList.remove('tr_active');
-}
-
-function initEditForm() {
-	nameInput = document.querySelector('.name');
-	priceInput = document.querySelector('.price');
-	countInput = document.querySelector('.count');
-	saveButton = document.querySelector('.save');
-	saveButton.addEventListener('click', saveData);
-}
-
-function startEdit(rowData) {
-	editedRowData = rowData;
-	nameInput.value = rowData.name;
-	priceInput.value = rowData.price;
-	countInput.value = rowData.count;
-	nameInput.removeAttribute('disabled');
-	priceInput.removeAttribute('disabled');
-	countInput.removeAttribute('disabled');
-	saveButton.removeAttribute('disabled');
-}
-
-function onTableClick(event) {
-	var row = event.target.closest('tr');
-	if (!row) {
-		return;
-	}
-	var id = parseInt(row.dataset.id);
-	var deleteButton = event.target.closest('.delete');
-	if (deleteButton) {
-		storage.remove(id);
-		return;
-	}
-	var rowActive = document.querySelector('.tr_active');
-	if (rowActive) {
-		rowActive.classList.remove('tr_active');
-	}
-	row.classList.add('tr_active');
-	var rowData = storage.get(id);
-	startEdit(rowData);
-}
-
-function init() {
-	storage = new Storage(data);
-	storage.on('add', appendRow);
-	storage.on('update', updateRow);
-	storage.on('remove', removeRow);
-	createTable(document.querySelector('.container'));
+document.addEventListener('DOMContentLoaded', function init() {
+	var table = new Table(document.querySelector('.container'));
+	var editForm = new EditForm();
+	var storage = new Storage(data);
+	storage.on('add', table.appendRow.bind(table));
+	storage.on('update', table.updateRow.bind(table));
+	storage.on('remove', table.removeRow.bind(table));
 	storage.forEach(function (rowData) {
-		appendRow(rowData);
+		table.appendRow(rowData);
 	});
-	initEditForm();
-	document.querySelector('.add').addEventListener('click', onAddRow);
-	table.addEventListener('click', onTableClick);
-}
-
-document.addEventListener('DOMContentLoaded', init);
+	table.on('remove', storage.remove.bind(storage));
+	table.on('rowClick', function (id) {
+		var rowData = storage.get(id);
+		editForm.startEdit(rowData);
+	});
+	editForm.on('save', storage.update.bind(storage));
+	document.querySelector('.add').addEventListener('click', function onAddRow() {
+		var rowData = {
+			name: 'unknown',
+			price: 0,
+			count: 0
+		};
+		storage.add(rowData);
+	});
+});
