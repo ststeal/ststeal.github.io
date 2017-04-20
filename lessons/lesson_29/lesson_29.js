@@ -1,4 +1,4 @@
-/* globals doT */
+/* globals doT $*/
 
 function EventEmitter() {
 	this._handlers = {};
@@ -124,33 +124,33 @@ var Table = inherit(EventEmitter, {
 var EditForm = inherit(EventEmitter, {
 	$constructor: function () {
 		EventEmitter.apply(this);
-		this._nameInput = document.querySelector('.name');
-		this._priceInput = document.querySelector('.price');
-		this._countInput = document.querySelector('.count');
-		this._saveButton = document.querySelector('.save');
-		this._saveButton.addEventListener('click', this._saveData.bind(this));
+		this._nameInput = $('.name');
+		this._priceInput = $('.price');
+		this._countInput = $('.count');
+		this._saveButton = $('.save');
+		this._saveButton.on('click', this._saveData.bind(this));
 	},
 	startEdit: function (rowData) {
 		this._editedRowData = rowData;
-		this._nameInput.value = rowData.name;
-		this._priceInput.value = rowData.price;
-		this._countInput.value = rowData.count;
-		this._nameInput.removeAttribute('disabled');
-		this._priceInput.removeAttribute('disabled');
-		this._countInput.removeAttribute('disabled');
-		this._saveButton.removeAttribute('disabled');
+		this._nameInput.val(rowData.name);
+		this._priceInput.val(rowData.price);
+		this._countInput.val(rowData.count);
+		this._nameInput.removeAttr('disabled');
+		this._priceInput.removeAttr('disabled');
+		this._countInput.removeAttr('disabled');
+		this._saveButton.removeAttr('disabled');
 	},
 	_saveData: function () {
-		this._editedRowData.name = this._nameInput.value || 'unknown';
-		this._editedRowData.price = parseFloat(this._priceInput.value) || 0;
-		this._editedRowData.count = parseInt(this._countInput.value) || 0;
-		this._nameInput.value = '';
-		this._priceInput.value = '';
-		this._countInput.value = '';
-		this._nameInput.setAttribute('disabled', '');
-		this._priceInput.setAttribute('disabled', '');
-		this._countInput.setAttribute('disabled', '');
-		this._saveButton.setAttribute('disabled', '');
+		this._editedRowData.name = this._nameInput.val() || 'unknown';
+		this._editedRowData.price = parseFloat(this._priceInput.val()) || 0;
+		this._editedRowData.count = parseInt(this._countInput.val()) || 0;
+		this._nameInput.val('');
+		this._priceInput.val('');
+		this._countInput.val('');
+		this._nameInput.attr('disabled', '');
+		this._priceInput.attr('disabled', '');
+		this._countInput.attr('disabled', '');
+		this._saveButton.attr('disabled', '');
 		this.trigger('save', this._editedRowData);
 	}
 });
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function init() {
 		editForm.startEdit(rowData);
 	});
 	editForm.on('save', storage.update.bind(storage));
-	document.querySelector('.add').addEventListener('click', function onAddRow() {
+	$('.add').on('click', function onAddRow() {
 		var rowData = {
 			name: 'unknown',
 			price: 0,
