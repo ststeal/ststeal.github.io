@@ -1,0 +1,37 @@
+{
+  "title": "TemplatePage",
+  "style": "style.css",
+  "script": "main.js",
+  "scriptDoT": "doT.js",
+  "menu": {
+    "class": "menu"
+  },
+  "menu_items": [
+    {
+      "class": "menu_item",
+      "id": "one",
+      "text": "one"
+    },
+    {
+      "class": "menu_item",
+      "id": "two",
+      "text": "two"
+    },
+    {
+      "class": "menu_item",
+      "id": "three",
+      "text": "three"
+    }
+  ],
+  "content": {
+    "class": "content"
+  },
+  "content_title": {
+    "class": "content_title",
+    "text": "Content Of Tab"
+  },
+  "content_box": {
+    "class": "content_box",
+    "id": "content_box"
+  }
+}
