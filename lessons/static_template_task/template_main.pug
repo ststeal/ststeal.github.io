@@ -8,7 +8,7 @@ html(lang='en')
     body
         div(class=menu.class)
             each val in menu_items
-                div(class=val.class id = val.id)=val.text
+                div(class = val.class id = val.id data-src = val.src)=val.text
         div(class=content.class)
             div(class=content_title.class)=content_title.text
             div(id=content_box.id class=content_box.class)

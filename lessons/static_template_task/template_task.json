@@ -10,17 +10,20 @@
     {
       "class": "menu_item",
       "id": "one",
-      "text": "one"
+      "text": "one",
+      "src":"source1.json"
     },
     {
       "class": "menu_item",
       "id": "two",
-      "text": "two"
+      "text": "two",
+      "src":"source2.json"
     },
     {
       "class": "menu_item",
       "id": "three",
-      "text": "three"
+      "text": "three",
+      "src":"source3.json"
     }
   ],
   "content": {
