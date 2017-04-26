@@ -98,7 +98,7 @@ var Table = inherit(EventEmitter, {
 	_onTableClick: function (event) {
 		var $target = $(event.target);
 		var $row = $target.closest('tr');
-		if (!$row) {
+		if ($row.length===0) {
 			return;
 		}
 		var id = parseInt($row.data('id'));
