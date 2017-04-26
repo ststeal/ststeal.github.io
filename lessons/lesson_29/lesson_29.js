@@ -70,12 +70,10 @@ var Storage = inherit(EventEmitter, {
 });
 
 var Table = inherit(EventEmitter, {
-	$constructor: function (container) {
+	$constructor: function ($container) {
 		EventEmitter.apply(this);
-		this._table = document.createElement('table');
-		this._table.className = 'table';
-		container.appendChild(this._table);
-		this._table.addEventListener('click', this._onTableClick.bind(this));
+		this._$table = $('<table>').addClass('table').on('click', this._onTableClick.bind(this));
+		$container.append(this._$table);
 		this._template = doT.template(
 			'<td>{{!it.name}}</td>' +
 			'<td>{{!it.price.toFixed(2)}}</td>' +
@@ -84,39 +82,35 @@ var Table = inherit(EventEmitter, {
 		);
 	},
 	appendRow: function (rowData) {
-		var row = document.createElement('tr');
-		row.innerHTML = this._generateRowHTML(rowData);
-		row.setAttribute('data-id', rowData.id);
-		this._table.appendChild(row);
+		var $row = $('<tr>').attr('data-id', rowData.id).html(this._generateRowHTML(rowData));
+		this._$table.append($row);
 	},
 	updateRow: function (rowData) {
-		var row = this._table.querySelector('[data-id="' + rowData.id + '"]');
-		row.innerHTML = this._generateRowHTML(rowData);
-		this._table.querySelector('.tr_active').classList.remove('tr_active');
+		this._$table.find('[data-id="' + rowData.id + '"]').html(this._generateRowHTML(rowData));
+		this._$table.find('.tr_active').removeClass('tr_active');
 	},
 	removeRow: function (rowData) {
-		var row = this._table.querySelector('[data-id="' + rowData.id + '"]');
-		row.parentNode.removeChild(row);
+		this._$table.find('[data-id="' + rowData.id + '"]').remove();
 	},
 	_generateRowHTML: function (rowData) {
 		return this._template(rowData);
 	},
 	_onTableClick: function (event) {
-		var row = event.target.closest('tr');
-		if (!row) {
+		var $row = $(event.target).closest('tr');
+		if (!$row) {
 			return;
 		}
-		var id = parseInt(row.dataset.id);
-		var deleteButton = event.target.closest('.delete');
-		if (deleteButton) {
+		var id = parseInt($row.data('id'));
+		var $deleteButton = $(event.target).closest('.delete');
+		if ($deleteButton[0]) {
 			this.trigger('remove', id);
 			return;
 		}
-		var rowActive = document.querySelector('.tr_active');
-		if (rowActive) {
-			rowActive.classList.remove('tr_active');
+		var $rowActive = $('.tr_active');
+		if ($rowActive) {
+			$rowActive.removeClass('tr_active');
 		}
-		row.classList.add('tr_active');
+		$row.addClass('tr_active');
 		this.trigger('rowClick', id);
 	}
 });
@@ -144,12 +138,9 @@ var EditForm = inherit(EventEmitter, {
 		this._editedRowData.name = this._nameInput.val() || 'unknown';
 		this._editedRowData.price = parseFloat(this._priceInput.val()) || 0;
 		this._editedRowData.count = parseInt(this._countInput.val()) || 0;
-		this._nameInput.val('');
-		this._priceInput.val('');
-		this._countInput.val('');
-		this._nameInput.attr('disabled', '');
-		this._priceInput.attr('disabled', '');
-		this._countInput.attr('disabled', '');
+		this._nameInput.val('').attr('disabled', '');
+		this._priceInput.val('').attr('disabled', '');
+		this._countInput.val('').attr('disabled', '');
 		this._saveButton.attr('disabled', '');
 		this.trigger('save', this._editedRowData);
 	}
@@ -167,8 +158,8 @@ var data = [{
 	count: 6
 }];
 
-document.addEventListener('DOMContentLoaded', function init() {
-	var table = new Table(document.querySelector('.container'));
+$(window).ready(function init() {
+	var table = new Table($('.container'));
 	var editForm = new EditForm();
 	var storage = new Storage(data);
 	storage.on('add', table.appendRow.bind(table));
