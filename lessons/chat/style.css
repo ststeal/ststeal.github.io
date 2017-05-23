@@ -1,0 +1,100 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font: 17px 'Century Gothic', sans-serif;
+    line-height: 130%;
+}
+
+.bg-main {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.controls-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    margin: 5px 0 5px 0;
+}
+
+.controls-item {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input {
+    flex: 1 1 auto;
+    padding: 2px 5px;
+    height: 36px;
+    border-radius: 5px;
+    border: solid grey 2px;
+}
+
+button {
+    padding: 3px;
+    height: 36px;
+    border-radius: 5px;
+    width: 10%;
+    border: solid grey 2px;
+    min-width: 50px;
+    background-color: grey;
+    color: white;
+}
+
+.icon {
+    height: 35px;
+    width: 35px;
+}
+
+.message-area {
+    position: absolute;
+    top: 0;
+    bottom: 50px;
+    width: 100%;
+    /*height: 100%;*/
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.message {
+    position: relative;
+    margin: 10px 0;
+    padding: 10px;
+    clear: both;
+    z-index: 1;
+    max-width: 90%;
+    word-wrap: break-word;
+}
+
+.your {
+    color: white;
+    float: left;
+    padding-left: 15px;
+    border-radius: 0 5px 5px 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.41));
+    border: solid rgba(255, 255, 255, 0.25) 1px;
+    border-left: 0;
+}
+
+.my {
+    color: black;
+    float: right;
+    padding-right: 15px;
+    border-radius: 5px 0 0 5px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(136, 136, 136, 0.41));
+    border: solid black 1px;
+    border-right: 0;
+}
