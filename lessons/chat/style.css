@@ -43,6 +43,11 @@ input {
     border: solid grey 2px;
 }
 
+input:focus{
+    outline-offset: 0;
+    outline: none;
+}
+
 button {
     padding: 3px;
     height: 36px;
@@ -64,7 +69,6 @@ button {
     top: 0;
     bottom: 50px;
     width: 100%;
-    /*height: 100%;*/
     overflow-x: hidden;
     overflow-y: auto;
 }

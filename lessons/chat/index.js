@@ -11,6 +11,7 @@ document.querySelector('.controls-box').addEventListener('click', function (even
 		newMessage.className = 'message my';
 		newMessage.textContent = document.querySelector('#message').value;
 		messageArea.append(newMessage);
+		messageArea.scrollTop = document.querySelector('.message:last-child').offsetTop;
 	}
 	if (target.id === 'attach') {
 		console.log('attach');
