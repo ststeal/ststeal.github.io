@@ -41,6 +41,8 @@ input {
     height: 36px;
     border-radius: 5px;
     border: solid grey 2px;
+    font: 17px 'Century Gothic', sans-serif;
+    color: black;
 }
 
 input:focus{
