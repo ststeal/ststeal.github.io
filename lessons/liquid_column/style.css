@@ -1,0 +1,39 @@
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    margin: 0;
+}
+
+.container{
+    /*margin: auto;*/
+    font-size: 0;
+    white-space: nowrap;
+    width: 1005px;
+    height: 50%;
+}
+
+.column{
+    display: inline-block;
+    width: 500px;
+    height: 100%;
+}
+
+.first{
+    background-color: #770088;
+}
+
+.second{
+    background-color: #0055aa;
+}
+
+.resize{
+    display: inline-block;
+    height: 100%;
+    width: 5px;
+    cursor: col-resize;
+    background-color: black;
+    z-index: 3;
+}
