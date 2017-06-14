@@ -1,31 +1,44 @@
-body{
+body {
     margin: 0;
     color: white;
 }
 
-table{
+table {
     margin-top: 48px;
     border: solid 5px black;
     border-collapse: collapse;
 }
 
-td{
+td {
     border: solid 5px black;
     width: 150px;
     min-width: 100px;
 }
 
-/*tr:hover{*/
-    /*background-color: #2b908f;*/
-/*}*/
+tr:hover {
+    background-color: #2b908f;
+}
 
-thead{
-    position: fixed;
-    top:0;
-    left: 0;
+thead {
     background-color: #770088;
 }
 
-.content-row{
+.first {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.second {
+
+}
+
+.content-row {
     background-color: #004444;
+}
+
+.content {
+    width: 80%;
+    height: 200px;
 }

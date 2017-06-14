@@ -1,9 +1,20 @@
-document.querySelector('table').addEventListener('mouseover',function (event) {
-	console.log(console.dir(event.target.parentNode));
-	event.target.parentNode.style.backgroundColor = '#2b908f';
-});
+var table = document.querySelector('table');
+var header = document.querySelector('.first');
 
-document.querySelector('table').addEventListener('mouseout',function (event) {
-	console.log(console.dir(event.target.parentNode));
-	event.target.parentNode.style.backgroundColor = '';
+// table.addEventListener('mouseover',function (event) {
+// 	event.target.parentNode.style.backgroundColor = '#2b908f';
+// });
+//
+// table.addEventListener('mouseout',function (event) {
+// 	event.target.parentNode.style.backgroundColor = '';
+// });
+
+document.addEventListener('scroll', function () {
+	header.style.left = 0 - window.scrollX + 'px';
+	if (window.scrollY >= table.offsetTop) {
+		header.style.display = 'block';
+	}
+	if (window.scrollY < table.offsetTop) {
+		header.style.display = 'none';
+	}
 });
