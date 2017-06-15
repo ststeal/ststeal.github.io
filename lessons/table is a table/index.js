@@ -1,6 +1,6 @@
 var table = document.querySelector('table');
 var header = document.querySelector('thead');
-var gap = document.createElement('div',{});
+var gap = document.createElement('div');
 gap.style.height = document.querySelector('tr').offsetHeight + 'px';
 gap.className = 'gap';
 header.style.top = 0;
