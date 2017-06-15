@@ -24,10 +24,10 @@ thead {
 }
 
 .first {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
+    /*display: none;*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
 }
 
 .second {

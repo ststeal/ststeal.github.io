@@ -1,20 +1,23 @@
 var table = document.querySelector('table');
-var header = document.querySelector('.first');
+var header = document.querySelector('thead');
+var gap = document.createElement('div',{});
+gap.style.height = document.querySelector('tr').offsetHeight + 'px';
+gap.className = 'gap';
+header.style.top = 0;
 
-// table.addEventListener('mouseover',function (event) {
-// 	event.target.parentNode.style.backgroundColor = '#2b908f';
-// });
-//
-// table.addEventListener('mouseout',function (event) {
-// 	event.target.parentNode.style.backgroundColor = '';
-// });
 
 document.addEventListener('scroll', function () {
-	header.style.left = 0 - window.scrollX + 'px';
 	if (window.scrollY >= table.offsetTop) {
-		header.style.display = 'block';
+		header.style.position = 'fixed';
+		header.style.left = 0 - window.scrollX + 'px';
+		if (!document.querySelector('.gap')) {
+			table.insertBefore(gap, table.firstChild);
+		}
 	}
 	if (window.scrollY < table.offsetTop) {
-		header.style.display = 'none';
+		header.style.position = 'static';
+		if (document.querySelector('.gap')) {
+			table.removeChild(gap);
+		}
 	}
 });
