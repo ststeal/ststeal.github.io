@@ -5,8 +5,8 @@ body {
 
 table {
     margin-top: 48px;
-    border: solid 5px black;
     border-collapse: collapse;
+    display: block;
 }
 
 td {
@@ -21,6 +21,17 @@ tr:hover {
 
 thead {
     background-color: #770088;
+    position: sticky;
+    top: 0;
+    border-bottom: none;
+}
+
+thead,tbody,tfoot{
+    display: table;
+}
+
+tbody tr:first-child td{
+    border-top: none;
 }
 
 .content-row {
@@ -30,4 +41,5 @@ thead {
 .content {
     width: 80%;
     height: 200px;
+    background-color: #2b908f;
 }

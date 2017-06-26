@@ -15,7 +15,7 @@ document.addEventListener('scroll', function () {
 		}
 	}
 	if (window.scrollY < table.offsetTop) {
-		header.style.position = 'static';
+		header.style.position = '';
 		if (document.querySelector('.gap')) {
 			table.removeChild(gap);
 		}
