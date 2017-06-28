@@ -1,0 +1,84 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 800px;
+    height: 1000px;
+    margin: 50px auto;
+    border: 3px solid rgb(123, 71, 69);
+    border-radius: 5px;
+    background-color: rgb(69, 121, 123);
+    font-size: 80%;
+}
+
+.content {
+    width: 350px;
+    height: 150px;
+    margin: 10px 0;
+    border: 3px solid rgb(123, 71, 69);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+}
+
+.image {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.description {
+    display: inline-block;
+    margin-top: 15px;
+    vertical-align: top;
+    margin-left: 15px;
+}
+
+.text {
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    border-top: 2px solid rgb(123, 71, 69);
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.text:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.motherboard-image {
+    background-image: url(image/motherboard.jpg);
+}
+
+.hard-image {
+    background-image: url(image/hard.jpg);
+}
+
+.ssd-image {
+    background-image: url(image/ssd.jpg);
+}
+
+.cooler-image {
+    background-image: url(image/cooler.jpg);
+}
+
+.video-image {
+    background-image: url(image/video.jpg);
+}
+
+.energy-image {
+    background-image: url(image/energy.jpg);
+}
+
+.memory-image {
+    background-image: url(image/memory.jpg);
+}
