@@ -3,7 +3,6 @@ html, body {
     height: 100%;
     font-family: "Century Gothic";
     font-size: 14px;
-    color: #FFFFFF;
 }
 
 .header {
@@ -70,6 +69,7 @@ html, body {
 .start-box {
     background-color: #001DF0;
     width: 220px;
+    color: #FFFFFF;
 }
 
 .logo {
@@ -135,6 +135,7 @@ input, button {
 }
 
 .slider-all-projects{
+    color: #001DF0;
     border: solid 2px #001DF0;
     width: 148px;
     height: 44px;
@@ -145,4 +146,83 @@ input, button {
     box-sizing: border-box;
     line-height: 40px;
     cursor: pointer;
+}
+
+.skills{
+    margin: 76px 40px 64px 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.skills-item{
+    margin-right: 45px;
+}
+
+.skills-item:last-child{
+    margin-right: 0;
+}
+
+.skills-icon{
+    width: 104px;
+    height: 104px;
+    background-color: #2b908f;
+}
+
+.skills-title{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 43px 0 14px 0;
+}
+
+.skills-text{
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.skills-more{
+    color: #001DF0;
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: bold;
+}
+
+.advantages{
+    color: white;
+    background-color: #001DF0;
+    padding-top: 64px;
+}
+
+.advantages-title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.advantages-list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 33px 40px 0 40px;
+}
+
+.advantages-item:nth-child(2n+1){
+    margin-right: 45px;
+}
+
+.advantages-item{
+    white-space: nowrap;
+    width: 444px;
+}
+
+.advantages-mark{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+}
+
+.advantages-text{
+    display: inline-block;
+    white-space: normal;
 }
