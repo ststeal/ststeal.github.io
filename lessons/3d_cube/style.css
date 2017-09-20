@@ -1,16 +1,19 @@
+body{
+    perspective: 600px;
+}
+
 .container {
     font-size: 0;
-    margin-left: 300px;
+    margin-left: 450px;
     perspective: 600px;
-    perspective-origin: 15% 75%;
+    perspective-origin: 50% 100%;
     transform-style: preserve-3d;
 }
 
 .edge {
     display: inline-block;
-    width: 300px;
-    height: 300px;
-    font-size: 70px;
+    width: 150px;
+    height: 150px;
     backface-visibility: hidden;
     box-sizing: border-box;
     border: dashed 2px white;
@@ -34,13 +37,13 @@
 
 .four {
     background-color: #00B7FF;
-    transform: rotatey(180deg) translateZ(300px) TranslateX(300px);
+    transform: rotatey(180deg) translateZ(150px) TranslateX(150px);
     transform-origin: 0 50%;
 }
 
 .five {
     background-color: #004444;
-    transform:translateZ(-300px) translateX(-900px) rotateY(-90deg);
+    transform:translateZ(-150px) translateX(-450px) rotateY(-90deg);
     transform-origin: 0 50%;
 }
 
@@ -48,4 +51,9 @@
     background-color: #77ee77;
     transform: rotateX(-90deg);
     transform-origin: 50% 0;
+}
+
+.ranges{
+    position: relative;
+    margin-left: 450px;
 }
