@@ -1,0 +1,51 @@
+.container {
+    font-size: 0;
+    margin-left: 300px;
+    perspective: 600px;
+    perspective-origin: 15% 75%;
+    transform-style: preserve-3d;
+}
+
+.edge {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    font-size: 70px;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    border: dashed 2px white;
+}
+
+.one {
+    background-color: #2b908f;
+    transform: rotateX(90deg);
+    transform-origin: 50% 100%;
+}
+
+.two {
+    background-color: #770088;
+}
+
+.three {
+    background-color: #0055aa;
+    transform: rotatey(90deg);
+    transform-origin: 0 50%;
+}
+
+.four {
+    background-color: #00B7FF;
+    transform: rotatey(180deg) translateZ(300px) TranslateX(300px);
+    transform-origin: 0 50%;
+}
+
+.five {
+    background-color: #004444;
+    transform:translateZ(-300px) translateX(-900px) rotateY(-90deg);
+    transform-origin: 0 50%;
+}
+
+.six {
+    background-color: #77ee77;
+    transform: rotateX(-90deg);
+    transform-origin: 50% 0;
+}
