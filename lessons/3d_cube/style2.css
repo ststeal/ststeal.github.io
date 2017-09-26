@@ -60,6 +60,7 @@
 
 .ranges {
     position: absolute;
-    margin: 300px 0 0 450px;
+    bottom: 15px;
+    left: 50%;
     top: 200px;
 }
