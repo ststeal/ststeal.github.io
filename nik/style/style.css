@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     height: 100%;
-    font-family: "Century Gothic";
+    font-family: "Century Gothic",sans-serif;
     font-size: 14px;
 }
 
