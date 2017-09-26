@@ -61,5 +61,9 @@
 .ranges {
     position: absolute;
     bottom: 15px;
-    left: 50%;
+}
+
+input {
+    width: 400px;
+    cursor: pointer;
 }
