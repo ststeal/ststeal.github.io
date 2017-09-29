@@ -1,21 +1,12 @@
 var cube = document.querySelector('.cube'),
-	rotationInput = document.querySelector('.rotation'),
-	distanceInput = document.querySelector('.distance'),
-	rotationValue=0,
-	distanceValue=0;
+	preCube = document.querySelector('.pre-cube'),
+	speedInput = document.querySelector('.speed'),
+	speedValue = 0;
 
-function setTransform(rot,trans) {
-	cube.style.transform = ['rotateX(', rot, 'deg)',' ','translateZ(', trans, 'px)'].join('');
-}
-
-cube.style.transform = 'rotateX(0deg) translateZ(0px)';
-
-rotationInput.addEventListener('input', function () {
-	rotationValue = rotationInput.value;
-	setTransform(rotationValue,distanceValue);
-});
-
-distanceInput.addEventListener('input', function () {
-	distanceValue = distanceInput.value;
-	setTransform(rotationValue,distanceValue);
+speedInput.addEventListener('input', function () {
+	speedValue = speedInput.value;
+	preCube.style.animation = ['translateZ ',speedValue,'s ease-in infinite both'].join((''));
+	cube.style.animation = ['rotateX ',speedValue,'s ease-in infinite both'].join('');
+	preCube.style.animationDirection = 'alternate';
+	cube.style.animationDirection = 'alternate';
 });

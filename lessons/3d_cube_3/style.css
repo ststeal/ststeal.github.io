@@ -22,11 +22,36 @@ body{
     perspective-origin: 100% 100%;
 }
 
+.pre-cube{
+    transform-style: preserve-3d;
+    animation: translateZ 5s ease-in infinite both;
+    animation-direction: alternate;
+}
 
 .cube {
     transform-style: preserve-3d;
     width: 150px;
     height: 150px;
+    animation: rotateX 5s ease-in infinite both;
+    animation-direction: alternate;
+}
+
+@keyframes rotateX {
+    0% {
+        transform: rotateX(0deg);
+    }
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+@keyframes translateZ {
+    0% {
+        transform: translateZ(0px);
+    }
+    100% {
+        transform: translateZ(100px);
+    }
 }
 
 .edge {
@@ -77,3 +102,7 @@ input {
     width: 400px;
     cursor: pointer;
 }
+
+
+
+
