@@ -1,0 +1,94 @@
+.checkbox {
+    width: 0;
+    height: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+}
+
+.checkbox::after {
+    cursor: pointer;
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 44px;
+    height: 44px;
+    background-color: #FFFFFF;
+    border-radius: 100%;
+    border: 2px solid #D9D9D9;
+    box-sizing: border-box;
+    animation:   0.25s ease-in-out 1 both alternate;
+
+}
+
+.container {
+    background-color: #F8F8F8;
+    width: 70px;
+    height: 40px;
+    border-radius: 30px;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    animation:  0.25s ease-in-out 1 both alternate;
+
+}
+
+.checked::after {
+    animation-name: control-on ;
+}
+
+.unchecked::after {
+    animation-name: control-off;
+}
+
+.bg-on {
+    animation-name: bg-on ;
+}
+
+.bg-off {
+    animation-name: bg-off;
+}
+
+@keyframes control-on {
+    0% {
+        transform: translateX(0);
+        border-color: #D9D9D9;
+    }
+    100% {
+        transform: translateX(30px);
+        border-color: #62D95D;
+    }
+}
+
+@keyframes control-off {
+    0% {
+        transform: translateX(30px);
+        border-color: #62D95D;
+    }
+    100% {
+        transform: translateX(0);
+        border-color: #D9D9D9;
+    }
+}
+
+@keyframes bg-on {
+    0% {
+        background-color: white;
+        border-color: #D9D9D9;
+    }
+    100% {
+        background-color: #62D95D;
+        border-color: #62D95D;
+    }
+}
+
+@keyframes bg-off {
+    0% {
+        background-color: #62D95D;
+        border-color: #62D95D;
+    }
+    100% {
+        background-color: white;
+        border-color: #D9D9D9;
+    }
+}
