@@ -18,8 +18,8 @@
     border-radius: 100%;
     border: 2px solid #D9D9D9;
     box-sizing: border-box;
-    animation:   0.25s ease-in-out 1 both alternate;
-
+    /*animation:   0.25s ease-in-out 1 both alternate;*/
+    transition: left 0.25s ease-in-out,border-color 0.25s ease-in-out;
 }
 
 .container {
@@ -29,66 +29,70 @@
     border-radius: 30px;
     position: relative;
     border: 2px solid #D9D9D9;
-    animation:  0.25s ease-in-out 1 both alternate;
-
+    /*animation:  0.25s ease-in-out 1 both alternate;*/
+    transition: border-color 0.25s ease-in-out,background-color 0.25s ease-in-out;
 }
 
 .checked::after {
-    animation-name: control-on ;
+    left:28px;
+    border-color: #62D95D;
 }
 
-.unchecked::after {
-    animation-name: control-off;
-}
+/*.unchecked::after {*/
+    /*left:-2px;*/
+    /*border-color: #D9D9D9;*/
+/*}*/
 
 .bg-on {
-    animation-name: bg-on ;
+    background-color:#62D95D;
+    border-color: #62D95D;
 }
 
-.bg-off {
-    animation-name: bg-off;
-}
+/*.bg-off {*/
+    /*background-color:#F8F8F8;*/
+    /*border-color: #D9D9D9;*/
+/*}*/
 
-@keyframes control-on {
-    0% {
-        transform: translateX(0);
-        border-color: #D9D9D9;
-    }
-    100% {
-        transform: translateX(30px);
-        border-color: #62D95D;
-    }
-}
+/*@keyframes control-on {*/
+    /*0% {*/
+        /*transform: translateX(0);*/
+        /*border-color: #D9D9D9;*/
+    /*}*/
+    /*100% {*/
+        /*transform: translateX(30px);*/
+        /*border-color: #62D95D;*/
+    /*}*/
+/*}*/
 
-@keyframes control-off {
-    0% {
-        transform: translateX(30px);
-        border-color: #62D95D;
-    }
-    100% {
-        transform: translateX(0);
-        border-color: #D9D9D9;
-    }
-}
+/*@keyframes control-off {*/
+    /*0% {*/
+        /*transform: translateX(30px);*/
+        /*border-color: #62D95D;*/
+    /*}*/
+    /*100% {*/
+        /*transform: translateX(0);*/
+        /*border-color: #D9D9D9;*/
+    /*}*/
+/*}*/
 
-@keyframes bg-on {
-    0% {
-        background-color: white;
-        border-color: #D9D9D9;
-    }
-    100% {
-        background-color: #62D95D;
-        border-color: #62D95D;
-    }
-}
+/*@keyframes bg-on {*/
+    /*0% {*/
+        /*background-color: white;*/
+        /*border-color: #D9D9D9;*/
+    /*}*/
+    /*100% {*/
+        /*background-color: #62D95D;*/
+        /*border-color: #62D95D;*/
+    /*}*/
+/*}*/
 
-@keyframes bg-off {
-    0% {
-        background-color: #62D95D;
-        border-color: #62D95D;
-    }
-    100% {
-        background-color: white;
-        border-color: #D9D9D9;
-    }
-}
+/*@keyframes bg-off {*/
+    /*0% {*/
+        /*background-color: #62D95D;*/
+        /*border-color: #62D95D;*/
+    /*}*/
+    /*100% {*/
+        /*background-color: white;*/
+        /*border-color: #D9D9D9;*/
+    /*}*/
+/*}*/
