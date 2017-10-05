@@ -19,7 +19,6 @@ body{
     align-items: center;
     background-color: grey;
     perspective: 500px;
-    /*perspective-origin: 100% 100%;*/
 }
 
 .pre-cube{
