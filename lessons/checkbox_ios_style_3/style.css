@@ -1,4 +1,4 @@
-.container{
+.container {
     position: relative;
 }
 
@@ -6,14 +6,11 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 80px;
-    height: 40px;
     margin: 0;
     opacity: 0;
-    z-index: 3;
 }
 
-.bg{
+.bg {
     position: absolute;
     width: 80px;
     height: 40px;
@@ -22,10 +19,9 @@
     transition: 0.25s ease-in-out;
     border: 2px solid #DDDDDD;
     box-sizing: border-box;
-    z-index: 1;
 }
 
-.control{
+.control {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -34,25 +30,14 @@
     transition: 0.25s ease-in-out;
     border: 2px solid #DDDDDD;
     box-sizing: border-box;
-    z-index: 2;
 }
 
-.checkbox:checked~.bg{
+.checkbox:checked ~ .bg {
     background-color: #3FBF00;
     border-color: #3FBF00;
 }
 
-.checkbox:checked~.control{
+.checkbox:checked ~ .control {
     transform: translateX(100%);
     border-color: #3FBF00;
 }
-
-/*.checkbox:checked::before {*/
-    /*background-color: #3FBF00;*/
-    /*border-color: #3FBF00;*/
-/*}*/
-
-/*.checkbox:checked::after {*/
-    /*transform: translateX(100%);*/
-    /*border-color: #3FBF00;*/
-/*}*/
