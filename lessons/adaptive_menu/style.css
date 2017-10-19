@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    font-family: "Product Sans", "Open Sans", Roboto, Arial, Helvetica, sans-serif;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.overlay-animated{
+    opacity: 0.7;
+    pointer-events: auto;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F1F1F1;
+    height: 50px;
+}
+
+.main {
+    line-height: 50px;
+    padding: 0 5px;
+    min-width: 170px;
+}
+
+.main-title {
+}
+
+.menu {
+    display: none;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 700px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 90%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    background-color: #F1F1F1;
+    box-shadow: 0 0 20px rgba(0,0,0,.3)
+}
+
+.menu-item {
+    display: block;
+    background-color: #CCCCCC;
+    box-shadow: inset 0 0 20px white;
+    line-height: 50px;
+    padding: 0 5px;
+}
+
+.menu-item-bar {
+    width: 200px;
+    height: 50px;
+    margin: 5px 0;
+    background-color: inherit;
+    box-shadow: none;
+}
+
+.menu-item-title {
+    display: none;
+}
+
+.icon {
+    vertical-align: middle;
+}
+
+.menu-icon {
+    position: absolute;
+    right: 5px;
+    z-index: 3;
+    margin: 0 5px;
+    width: 50px;
+}
+
+.menu-item-icon {
+    display: none;
+}
+
+.main-icon {
+    display: none;
+}
+
+@media (max-width: 399px) {
+    .menu-item-icon {
+        display: inline;
+    }
+    .menu-item-title{
+        display: inline;
+    }
+}
+
+@media (min-width: 400px) {
+    .menu-item-icon {
+        display: inline;
+    }
+
+    .menu {
+        display: flex;
+    }
+
+    .menu-icon {
+        display: none;
+    }
+}
+
+@media (min-width: 450px) {
+    .main {
+        min-width: 200px;
+    }
+
+    .main-icon {
+        display: inline;
+    }
+}
+
+@media (min-width: 700px) {
+    .menu-item-title {
+        display: inline;
+    }
+}
