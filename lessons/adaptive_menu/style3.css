@@ -16,12 +16,7 @@ body {
     pointer-events: none;
 }
 
-/*.overlay-animated {*/
-    /*visibility: visible;*/
-    /*pointer-events: auto;*/
-/*}*/
-
-.menu-bar~.overlay{
+.menu-bar ~ .overlay {
     visibility: visible;
     pointer-events: auto;
 }
@@ -37,9 +32,6 @@ body {
     line-height: 50px;
     padding: 0 5px;
     min-width: 200px;
-}
-
-.main-title {
 }
 
 .menu {
@@ -85,17 +77,6 @@ body {
     display: none;
 }
 
-.icon {
-    vertical-align: middle;
-}
-
-.menu-item-icon {
-    display: none;
-}
-
-.main-icon {
-}
-
 .menu-button {
     position: absolute;
     top: 0;
@@ -110,6 +91,50 @@ body {
 
 .menu-button:focus {
     outline: none;
+    border: solid 2px black;
+}
+
+.icon-s {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon-m {
+    width: 80px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon {
+    display: inline-block;
+    background-size: cover;
+    margin: auto 5px auto 0;
+    current-color: red;
+}
+
+.icon-menu {
+    background-image: url(icons/menu.svg);
+}
+
+.icon-android {
+    background-image: url(icons/android.svg);
+}
+
+.icon-windows {
+    background-image: url(icons/windows8.svg);
+}
+
+.icon-youtube {
+    background-image: url(icons/youtube2.svg);
+}
+
+.icon-tongue {
+    background-image: url(icons/tongue2.svg);
+}
+
+.icon-steam {
+    background-image: url(icons/steam.svg);
 }
 
 @media (max-width: 419px) {
@@ -124,9 +149,6 @@ body {
 }
 
 @media (min-width: 420px) {
-    .menu-item-icon {
-        display: inline;
-    }
 
     .menu {
         display: flex;
@@ -136,12 +158,12 @@ body {
         display: none;
     }
 
-    .main-icon {
-        display: none;
-    }
-
     .main {
         min-width: 170px;
+    }
+
+    .icon-tongue {
+        display: none;
     }
 }
 
@@ -150,8 +172,8 @@ body {
         min-width: 200px;
     }
 
-    .main-icon {
-        display: inline;
+    .icon-tongue {
+        display: inline-block;
     }
 }
 

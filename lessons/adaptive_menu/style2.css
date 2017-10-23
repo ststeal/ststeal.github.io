@@ -16,12 +16,7 @@ body {
     pointer-events: none;
 }
 
-/*.overlay-animated {*/
-    /*visibility: visible;*/
-    /*pointer-events: auto;*/
-/*}*/
-
-.menu-bar~.overlay{
+.menu-bar ~ .overlay {
     visibility: visible;
     pointer-events: auto;
 }
@@ -37,9 +32,6 @@ body {
     line-height: 50px;
     padding: 0 5px;
     min-width: 200px;
-}
-
-.main-title {
 }
 
 .menu {
@@ -85,31 +77,19 @@ body {
     display: none;
 }
 
-.icon {
-    vertical-align: middle;
-}
-
-.menu-item-icon {
-    display: none;
-}
-
-.main-icon {
-}
-
 .menu-button {
     position: absolute;
     top: 0;
     right: 0;
     width: 50px;
     height: 50px;
-    background: url(icons/menu.svg) transparent;
-    background-size: cover;
     border: 0;
     z-index: 3;
 }
 
 .menu-button:focus {
     outline: none;
+    border: solid 2px black;
 }
 
 @media (max-width: 419px) {
@@ -124,9 +104,6 @@ body {
 }
 
 @media (min-width: 420px) {
-    .menu-item-icon {
-        display: inline;
-    }
 
     .menu {
         display: flex;
@@ -136,12 +113,12 @@ body {
         display: none;
     }
 
-    .main-icon {
-        display: none;
-    }
-
     .main {
         min-width: 170px;
+    }
+
+    .icon-main {
+        display: none;
     }
 }
 
@@ -150,7 +127,7 @@ body {
         min-width: 200px;
     }
 
-    .main-icon {
+    .icon-main {
         display: inline;
     }
 }
@@ -159,4 +136,20 @@ body {
     .menu-item-title {
         display: inline;
     }
+}
+
+.icon-s {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon-m {
+    width: 80px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon-hide {
+    display: none;
 }
