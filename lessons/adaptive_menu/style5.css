@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    font-family: "Product Sans", "Open Sans", Roboto, Arial, Helvetica, sans-serif;
+    color: darkgreen;
+}
+
+.overlay {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.menu-bar ~ .overlay {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F1F1F1;
+    height: 50px;
+}
+
+.main {
+    line-height: 50px;
+    padding: 0 5px;
+    min-width: 200px;
+}
+
+.menu {
+    display: none;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 700px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    background-color: #F1F1F1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .3)
+}
+
+.menu-item {
+    display: block;
+    background-color: #CCCCCC;
+    box-shadow: inset 0 0 20px white;
+    line-height: 50px;
+    padding: 0 5px;
+}
+
+.menu-bar .menu-item {
+    width: 200px;
+    height: 50px;
+    margin: 5px 0;
+    background-color: inherit;
+    box-shadow: none;
+}
+
+.menu-item-title {
+    display: none;
+}
+
+.menu-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    z-index: 3;
+    color: blueviolet;
+
+}
+
+.menu-button:focus {
+    outline: none;
+    border: solid 2px blueviolet;
+}
+
+.icon-s {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon-m {
+    width: 80px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon {
+    font-family: "icomoon";
+    font-size: 32px;
+    display: inline-block;
+}
+
+@media (max-width: 419px) {
+    .menu-item-icon {
+        display: inline;
+    }
+
+    .menu-item-title {
+        display: inline;
+    }
+
+}
+
+@media (min-width: 420px) {
+
+    .menu {
+        display: flex;
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+    .main {
+        min-width: 170px;
+    }
+
+    .icon-main {
+        display: none;
+    }
+}
+
+@media (min-width: 470px) {
+    .main {
+        min-width: 200px;
+    }
+
+    .icon-main {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 720px) {
+    .menu-item-title {
+        display: inline;
+    }
+}
