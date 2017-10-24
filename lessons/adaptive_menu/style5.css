@@ -108,9 +108,10 @@ body {
 }
 
 .icon {
-    font-family: "icomoon";
+    font-family: "icomoon", sans-serif;
     font-size: 32px;
     display: inline-block;
+    vertical-align: middle;
 }
 
 @media (max-width: 419px) {
@@ -121,11 +122,9 @@ body {
     .menu-item-title {
         display: inline;
     }
-
 }
 
 @media (min-width: 420px) {
-
     .menu {
         display: flex;
     }

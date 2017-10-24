@@ -109,8 +109,6 @@ body {
 .icon {
     display: inline-block;
     background-size: cover;
-    margin: auto 5px auto 0;
-    current-color: red;
 }
 
 .icon-menu {
