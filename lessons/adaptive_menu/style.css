@@ -1,10 +1,11 @@
 html{
     font-size: 16px;
+    font-weight: bold;
 }
 
 body {
     margin: 0;
-    font-family: "Product Sans", "Open Sans", Roboto, Arial, Helvetica, sans-serif;
+    font-family: 'Raleway', "Product Sans", "Open Sans", Roboto, Arial, Helvetica, sans-serif;
 }
 
 .overlay {
@@ -36,6 +37,9 @@ body {
     line-height: 3rem;
     padding: 0 0.3rem;
     min-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .main-title {
