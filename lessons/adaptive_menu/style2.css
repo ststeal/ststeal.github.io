@@ -1,7 +1,17 @@
+@font-face {
+    font-family: "Raleway";
+    src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v12/IczWvq5y_Cwwv_rBjOtT0w.woff) format('woff');
+}
+
+html {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 body {
     margin: 0;
     color: #004444;
-    font-family: "Product Sans", "Open Sans", Roboto, Arial, Helvetica, sans-serif;
+    font-family: "Raleway", "Product Sans", "Open Sans", Roboto, Arial, Helvetica, sans-serif;
 }
 
 .overlay {
@@ -156,6 +166,6 @@ body {
     display: none;
 }
 
-svg{
+svg {
     fill: currentColor;
 }
