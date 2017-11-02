@@ -1,0 +1,19 @@
+.div_item {
+    margin: 10px;
+    padding: 10px;
+    background-color: #FFCE26;
+}
+
+.space{
+    height: 20px;
+    width: 2000px;
+}
+.text{
+    overflow-y: scroll;
+    width: 100px;
+    height: 100px;
+}
+
+h4{
+    background-color: #004444;
+}

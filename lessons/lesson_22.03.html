@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .one, .two, .three {
+            padding: 20px;
+        }
+
+        .one {
+            background-color: #00B7FF;
+        }
+
+        .two {
+            background-color: red;
+        }
+
+        .three {
+            background-color: #006600;
+        }
+
+        .even {
+            border: solid black 3px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="one" id="one">
+    <div class="two" id="two">
+        <div class="three" id="three"></div>
+        <div class="three even"></div>
+        <div class="three"></div>
+        <div class="three even" onclick="console.log('attribute')"></div>
+        <a href="https://www.ya.ru" id="link">Touch</a>
+    </div>
+</div>
+<div style="width: 82px;height: 38px;position: absolute;top: 0;left: 0;"></div>
+<script>
+	function addLiveListener(element, type, selector, handler) {
+		element.addEventListener(type, function (event) {
+			if (event.target.closest(selector)) {
+				handler.apply(this, arguments);
+			}
+		})
+	}
+	function addListener(element, type, handler) {
+		if (element.attachEvent) {
+			element.attachEvent('on' + type, handler);
+		}
+		else {
+//            element.addEventListener(type,handler.bind(null,'capturing'),true);
+			element.addEventListener(type, handler.bind(null, 'bubbling'), false);
+		}
+	}
+	var one = document.getElementById('one');
+	var two = document.getElementById('two');
+	var three = document.getElementById('three');
+	var link = document.getElementById('link');
+	addListener(one, 'click', function (type) {
+		console.log('one', type);
+	});
+	addListener(two, 'click', function (type, event) {
+//        event.stopPropagation();
+		console.log('two', type);
+	});
+	addListener(three, 'click', function (type) {
+		console.log('three', type);
+	});
+	addLiveListener(document, 'click', '.even', function () {
+		console.log('LiveClick');
+	});
+	//    addListener(link,'click', function (event) {
+	//        console.log('link',event);
+	//        event.preventDefault();
+	//    });
+	var handlerBind = linkHandler.bind({});
+	link.addEventListener('click', handlerBind);
+	link.removeEventListener('click', handlerBind);
+	function linkHandler(event) {
+		console.log('link', event);
+		event.preventDefault();
+	}
+</script>
+</body>
+</html>

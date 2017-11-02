@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="go"></div>
+<script>
+    function area(id, type) {
+        var newDiv = document.createElement(type);
+        newDiv.id = id;
+        document.body.appendChild(newDiv);
+        return newDiv;
+    }
+    function content(text, type, area) {
+        var newDiv = document.createElement(type);
+        newDiv.innerHTML = '<h1>' + text + '</h1>';
+        area.appendChild(newDiv);
+    }
+    function addSome(text, type, area) {
+        var newDiv = document.createElement(type);
+        var newText = document.createTextNode(text);
+        newDiv.appendChild(newText);
+        area.appendChild(newDiv);
+    }
+    var list = area('list', 'ul');
+//    content('раз', 'li', list);
+//    content('два', 'li', list);
+//    content('три', 'li', list);
+    addSome('раз', 'li', list);
+    addSome('два', 'li', list);
+    addSome('три', 'li', list);
+</script>
+</body>
+</html>

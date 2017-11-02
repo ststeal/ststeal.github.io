@@ -6,7 +6,7 @@ body {
 table {
     margin-top: 48px;
     border-collapse: collapse;
-    display: block;
+    /*display: block;*/
 }
 
 td {

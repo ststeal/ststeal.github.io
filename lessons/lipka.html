@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+		function lipka() {
+			document.cookie = 'touch2=1; domain=yandex.ru';
+			console.log('lipka');
+		}
+		function custom() {
+			var str = document.getElementById("cookie_input").value;
+			str = str + '; domain=yandex.ru';
+			document.cookie = str;
+			console.log(str)
+		}
+    </script>
+    <style>
+        .button {
+            display: block;
+            height: 200px;
+            width: 100%;
+            background: white;
+            font-size: 50px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<input type="button" class="button" value="ставит touch2=1" onclick="lipka()"/>
+<input type="text" class="button" value="name=value" onclick="lipka()" id="cookie_input"/>
+<input type="button" class="button" value="поставить кастом куку" onclick="custom()"/>
+
+</body>
+</html>

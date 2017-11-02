@@ -17,6 +17,7 @@
     background-color: #F8F8F8;
     border-radius: 20px;
     transition: 0.25s ease-in-out;
+    transition-property: background-color, border-color;
     border: 2px solid #DDDDDD;
     box-sizing: border-box;
 }
@@ -28,6 +29,7 @@
     background-color: #FFFFFF;
     border-radius: 50%;
     transition: 0.25s ease-in-out;
+    transition-property: transform, border-color;
     border: 2px solid #DDDDDD;
     box-sizing: border-box;
 }

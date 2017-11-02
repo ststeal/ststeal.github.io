@@ -1,0 +1,66 @@
+.container{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: solid 5px black;
+}
+
+.content{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin: auto;
+}
+
+/*1*/
+/* .content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+} */
+
+
+/*2*/
+/* .content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%)
+} */
+
+/*3*/
+/* .content{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+} */
+
+/*4*/
+/* .container{
+  display: table-cell;
+  vertical-align: middle;
+} */
+
+/*5*/
+
+.container{
+    text-align: center;
+}
+
+.container::before{
+    height: 100%;
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.content{
+    vertical-align: middle;
+    display: inline-block;
+}
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="table.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <title>Table</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td></td>
+        <td>|</td>
+        <td>&</td>
+        <td>^</td>
+    </tr>
+    <tr>
+        <td>0 0</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>0 1</td>
+        <td></td>
+        <td class='td'></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>1 0</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>1 1</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+<script>
+    for (var i = 0; i < 2; i++) {
+        for (var j = 0; j < 2; j++) {
+//            console.log(j | i);
+//            console.log(j & i);
+//            console.log(j ^ i);
+//            var a =  'tr:nth-child('+(j+2+i*2)+')>td:nth-child(2)';
+//            var b =  'tr:nth-child('+(j+2+i*2)+')>td:nth-child(3)';
+//            var c =  'tr:nth-child('+(j+2+i*2)+')>td:nth-child(4)';
+            $('tr:nth-child('+(j+2+i*2)+')>td:nth-child(2)').text(j | i);
+            $('tr:nth-child('+(j+2+i*2)+')>td:nth-child(3)').text(j & i);
+            $('tr:nth-child('+(j+2+i*2)+')>td:nth-child(4)').text(j ^ i);
+//            $('tr:nth-child(2)>td:nth-child(3)').text(j & i);
+//            $('tr:nth-child(2)>td:nth-child(4)').text(j ^ i);
+        }
+    }
+</script>
+</body>
+</html>

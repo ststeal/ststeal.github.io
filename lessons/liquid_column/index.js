@@ -2,13 +2,10 @@ var resizer = document.querySelector('.resize');
 var container = document.querySelector('.container');
 var first = document.querySelector('.first');
 var second = document.querySelector('.second');
-var resizerWidth = resizer.offsetWidth;
-var minColumnWidth = 200;
-var maxColumnWidth = 800;
-var firstColumnWidth, secondColumnWidth;
+var RESIZER_WIDTH = 5;
+var MIN_COLUMN_WIDTH = 200;
 var containerPositionX = container.offsetLeft;
-var containerWidth = container.offsetWidth - resizerWidth;
-console.log(containerWidth);
+var containerWidth = container.offsetWidth;
 
 resizer.addEventListener('mousedown', function () {
 	window.addEventListener('mousemove', mousemove);
@@ -19,30 +16,23 @@ window.addEventListener('mouseup', function () {
 });
 
 function mousemove(event) {
-	var firstWidth = first.offsetWidth;
-	var newWidth = event.screenX - containerPositionX;
-	console.log(event.screenX);
-	console.log(containerPositionX);
-	if (newWidth < minColumnWidth || newWidth > maxColumnWidth) {
-		if (newWidth < minColumnWidth) {
-			// first.style.width = minColumnWidth + 'px';
-			// second.style.width = maxColumnWidth + 'px';
-			firstColumnWidth = minColumnWidth + 'px';
-			secondColumnWidth = maxColumnWidth + 'px';
-		}
-		if (newWidth > maxColumnWidth) {
-			// first.style.width = maxColumnWidth + 'px';
-			// second.style.width = minColumnWidth + 'px';
-			firstColumnWidth = maxColumnWidth + 'px';
-			secondColumnWidth = minColumnWidth + 'px';
-		}
+	var leftColumn = event.screenX - containerPositionX,
+		rightColumn,
+		minWidth = MIN_COLUMN_WIDTH;
+
+	if (containerWidth < MIN_COLUMN_WIDTH * 2) {
+		minWidth = containerWidth / 2;
 	}
-	else {
-		// first.style.width = newWidth + 'px';
-		// second.style.width = containerWidth - firstWidth + 'px';
-		firstColumnWidth = newWidth + 'px';
-		secondColumnWidth = containerWidth - firstWidth + 'px';
+
+	if (leftColumn < minWidth) {
+		leftColumn = minWidth;
 	}
-	second.style.width = secondColumnWidth;
-	first.style.width = firstColumnWidth;
+	rightColumn = containerWidth - leftColumn - RESIZER_WIDTH;
+	if (rightColumn < minWidth) {
+		rightColumn = minWidth;
+		leftColumn = containerWidth - rightColumn - RESIZER_WIDTH;
+	}
+
+	first.style.width = leftColumn + 'px';
+	second.style.width = rightColumn + 'px';
 }

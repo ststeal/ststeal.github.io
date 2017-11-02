@@ -1,8 +1,8 @@
 /* globals doT $*/
 var template = doT.template('<div>Hi {{=it.title}}!</div><div>{{=it.body || "This body is empty"}}' + '</div>');
+var req = {};
 var res = {};
 var lastReq;
-
 
 function abortReq() {
 	if (lastReq) {
@@ -10,21 +10,18 @@ function abortReq() {
 	}
 }
 
-
-function req(target) {
+function getContent($target) {
 	abortReq();
-	var newResKey = target.attr('id') + '_req';
-	var newReqKey = target.attr('id') + '';
-	res[newResKey] = $.ajax({
-		url: target.data('src'),
+	var id = $target.attr('id');
+	req[id] = $.ajax({
+		url: $target.data('src'),
 		success: function (data) {
-			res[newReqKey] = template(JSON.parse(data));
-			$('.content_box').html(res[newReqKey]);
+			res[id] = template(JSON.parse(data));
+			$('.content_box').html(res[id]);
 		}
 	});
-	lastReq = res[newResKey];
+	lastReq = req[id];
 }
-
 
 $('.menu_item').on('click', function (event) {
 	var $target = $(event.target);
@@ -33,7 +30,7 @@ $('.menu_item').on('click', function (event) {
 		$target.addClass('menu_item_active');
 		var eventRes = res[$target.attr('id')];
 		if (!eventRes) {
-			req($target);
+			getContent($target);
 		}
 		else {
 			$('.content_box').html(eventRes);
