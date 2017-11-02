@@ -1,4 +1,4 @@
-html{
+html {
     font-size: 16px;
     font-weight: bold;
 }
@@ -8,7 +8,7 @@ body {
     font-family: 'Raleway', "Product Sans", "Open Sans", Roboto, Arial, Helvetica, sans-serif;
 }
 
-.overlay {
+.navigation__overlay {
     visibility: hidden;
     position: fixed;
     top: 0;
@@ -21,7 +21,7 @@ body {
     pointer-events: none;
 }
 
-.menu-bar ~ .overlay {
+.navigation__menu-bar ~ .navigation__overlay {
     visibility: visible;
     pointer-events: auto;
 }
@@ -33,7 +33,7 @@ body {
     height: 3rem;
 }
 
-.main {
+.navigation__main {
     line-height: 3rem;
     padding: 0 0.3rem;
     min-width: 200px;
@@ -42,10 +42,10 @@ body {
     text-overflow: ellipsis;
 }
 
-.main-title {
+.navigation__main-title {
 }
 
-.menu {
+.navigation__menu {
     display: none;
     justify-content: space-around;
     width: 100%;
@@ -54,7 +54,7 @@ body {
     padding: 0;
 }
 
-.menu-bar {
+.navigation__menu-bar {
     display: block;
     position: fixed;
     top: 0;
@@ -68,7 +68,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, .3)
 }
 
-.menu-item {
+.navigation__tab {
     display: block;
     background-color: #CCCCCC;
     box-shadow: inset 0 0 20px white;
@@ -80,7 +80,7 @@ body {
     max-width: 170px;
 }
 
-.menu-bar .menu-item {
+.navigation__menu-bar .navigation__tab {
     width: 200px;
     height: 3rem;
     margin: 0.3rem 0;
@@ -89,22 +89,19 @@ body {
     max-width: 200px;
 }
 
-.menu-item-title {
+.navigation__tab-title {
     display: none;
 }
 
-.icon {
+.navigation__icon {
     vertical-align: middle;
 }
 
-.menu-item-icon {
+.navigation__tab-icon {
     display: none;
 }
 
-.main-icon {
-}
-
-.menu-button {
+.navigation__menu-button {
     position: absolute;
     top: 0;
     right: 0;
@@ -115,60 +112,68 @@ body {
     z-index: 3;
 }
 
-.menu-button:focus {
+.navigation__menu-button:focus {
     outline: none;
 }
 
 @media (max-width: 419px) {
-    .menu-item-icon {
+    .navigation__tab-icon {
         display: inline;
     }
 
-    .menu-item-title {
+    .navigation__tab-title {
         display: inline;
     }
 
 }
 
 @media (min-width: 420px) {
-    .menu-item-icon {
+    .navigation__tab-icon {
         display: inline;
     }
 
-    .menu {
+    .navigation__menu {
         display: flex;
     }
 
-    .menu-button {
+    .navigation__menu-button {
         display: none;
     }
 
-    .main-icon {
+    .navigation__main-icon {
         display: none;
     }
 
-    .main {
+    .navigation__main {
         min-width: 170px;
     }
 }
 
 @media (min-width: 470px) {
-    .main {
+    .navigation__main {
         min-width: 200px;
     }
 
-    .main-icon {
+    .navigation__main-icon {
         display: inline;
+    }
+
+    html {
+        font-size: 18px;
     }
 }
 
 @media (min-width: 720px) {
-    .menu-item-title {
+    .navigation__tab-title {
         display: inline;
+    }
+
+    html {
+        font-size: 20px;
     }
 }
 
-.text{
+.text {
     font-size: 1rem;
     line-height: 1.5rem;
 }

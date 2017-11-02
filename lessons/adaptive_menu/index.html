@@ -9,32 +9,35 @@
 </head>
 <body>
 <nav class="navigation">
-    <div class="main">
-        <img src="icons/tongue2.svg" class="icon main-icon" alt="">
-        <span class="main-title">This is ststeal's menu</span>
+    <div class="navigation__main">
+        <img src="icons/tongue2.svg" class="navigation__icon navigation__main-icon" alt="">
+        <span class="navigation__main-title">This is ststeal's menu</span>
     </div>
-    <ul class="menu">
-        <li class="menu-item">
-            <img src="icons/youtube2.svg" class="icon menu-item-icon" alt="YouTube">
-            <span class="menu-item-title">YouTube</span>
+    <ul class="navigation__menu">
+        <li class="navigation__tab">
+            <img src="icons/youtube2.svg" class="navigation__icon navigation__tab-icon" alt="YouTube">
+            <span class="navigation__tab-title">YouTube</span>
         </li>
-        <li class="menu-item">
-            <img src="icons/steam.svg" class="icon menu-item-icon" alt="Steam">
-            <span class="menu-item-title">Steam</span>
+        <li class="navigation__tab">
+            <img src="icons/steam.svg" class="navigation__icon navigation__tab-icon" alt="Steam">
+            <span class="navigation__tab-title">Steam</span>
         </li>
-        <li class="menu-item">
-            <img src="icons/windows8.svg" class="icon menu-item-icon" alt="Windows">
-            <span class="menu-item-title">Windows</span>
+        <li class="navigation__tab">
+            <img src="icons/windows8.svg" class="navigation__icon navigation__tab-icon" alt="Windows">
+            <span class="navigation__tab-title">Windows</span>
         </li>
-        <li class="menu-item">
-            <img src="icons/android.svg" class="icon menu-item-icon" alt="Android">
-            <span class="menu-item-title">Android</span>
+        <li class="navigation__tab">
+            <img src="icons/android.svg" class="navigation__icon navigation__tab-icon" alt="Android">
+            <span class="navigation__tab-title">Android</span>
         </li>
     </ul>
-    <button class="menu-button" title="Slide Menu" role="button"></button>
-    <div class="overlay"></div>
+    <button class="navigation__menu-button" title="Slide Menu" role="button" aria-expanded="false"
+            aria-pressed="false"></button>
+    <div class="navigation__overlay"></div>
 </nav>
-<span class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse facilis illum ipsam molestiae natus non, odit praesentium provident quia rem sed tenetur velit? Commodi excepturi, neque nihil quaerat similique totam.</span>
+<article>
+    <span class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse facilis illum ipsam molestiae natus non, odit praesentium provident quia rem sed tenetur velit? Commodi excepturi, neque nihil quaerat similique totam.</span>
+</article>
 <script src="index.js" type="text/javascript"></script>
 </body>
 </html>

@@ -1,54 +1,60 @@
 @font-face {
-  font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?b7kcs8');
-  src:  url('fonts/icomoon.eot?b7kcs8#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?b7kcs8') format('truetype'),
-    url('fonts/icomoon.woff?b7kcs8') format('woff'),
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?b7kcs8');
+    src: url('fonts/icomoon.eot?b7kcs8#iefix') format('embedded-opentype'),
+    url('fonts/icomoon_2-webfont.woff2') format('woff2'),
+    url('fonts/icomoon_2-webfont.woff') format('woff'),
+    url('fonts/icomoon_2.ttf') format('truetype'),
     url('fonts/icomoon.svg?b7kcs8#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-weight: normal;
+    font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  
-  /* Enable Ligatures ================ */
-  letter-spacing: 0;
-  -webkit-font-feature-settings: "liga";
-  -moz-font-feature-settings: "liga=1";
-  -moz-font-feature-settings: "liga";
-  -ms-font-feature-settings: "liga" 1;
-  font-feature-settings: "liga";
-  -webkit-font-variant-ligatures: discretionary-ligatures;
-  font-variant-ligatures: discretionary-ligatures;
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
 
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* Enable Ligatures ================ */
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-menu:before {
-  content: "\e9bd";
+    content: "\e9bd";
 }
+
 .icon-tongue2:before {
-  content: "\e9e4";
+    content: "\e9e4";
 }
+
 .icon-youtube2:before {
-  content: "\ea9e";
+    content: "\ea9e";
 }
+
 .icon-steam:before {
-  content: "\eaac";
+    content: "\eaac";
 }
+
 .icon-android:before {
-  content: "\eac0";
+    content: "\eac0";
 }
+
 .icon-windows8:before {
-  content: "\eac2";
+    content: "\eac2";
 }
