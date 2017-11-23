@@ -4,9 +4,9 @@ var menuButton = document.querySelector('.navigation__menu-button');
 
 function toggleMenuStatus(toggle) {
 	if (toggle === undefined) {
-		toggle = !navigation.classList.contains('sidebar_yes');
+		toggle = !navigation.classList.contains('navigation_sidebar_yes');
 	}
-	navigation.classList.toggle('sidebar_yes', toggle);
+	navigation.classList.toggle('navigation_sidebar_yes', toggle);
 	menuButton.setAttribute('aria-expanded', String(toggle));
 	menuButton.setAttribute('aria-pressed', String(toggle));
 }
