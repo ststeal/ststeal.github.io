@@ -1,10 +1,11 @@
-$styleColor = black
+$primary = violet
+$secondary = blue
 
 
 font()
     font-size 18px
     font-weight bold
-    color lighten($styleColor, 90%)
+    color lighten($secondary, 90%)
 
 
 body
@@ -25,14 +26,16 @@ body
     margin 10px
     height 40px
     width 80px
-    border none
     border-radius 5px
-    background-color darken($styleColor, 50%)
+    border solid 2px $secondary
+    background-color darken($primary, 50%)
     font()
 
     &:active
-        background-color invert(darken($styleColor, 50%))
-        color invert(lighten($styleColor, 90%))
+        background-color invert(darken($primary, 50%))
+        color invert(lighten($secondary, 90%))
+        border-color  invert($secondary)
+
 
 
 .input
@@ -41,7 +44,8 @@ body
     height 30px
     margin 10px
     border-radius 5px
-    background-color darken($styleColor, 10%)
+    border solid 2px $secondary
+    background-color darken($primary, 10%)
     font()
 
 
@@ -84,17 +88,17 @@ body
 
 .checkbox:checked
     & ~ .bg
-        background-color darken($styleColor, 10%)
-        border-color darken($styleColor, 30%)
+        background-color darken($primary, 10%)
+        border-color lighten($secondary, 50%)
 
     & ~ .control
         transform translateX(100%)
-        border-color darken($styleColor, 30%)
+        border-color lighten($secondary, 50%)
 
 
 input
     &::-webkit-input-placeholder {
-    color lighten($styleColor, 50%)
+    color lighten($secondary, 30%)
     font-size 16px
     }
 

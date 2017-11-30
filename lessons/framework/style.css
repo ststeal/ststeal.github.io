@@ -14,16 +14,17 @@ body {
   margin: 10px;
   height: 40px;
   width: 80px;
-  border: none;
   border-radius: 5px;
-  background-color: #000;
+  border: solid 2px #00f;
+  background-color: #a216a2;
   font-size: 18px;
   font-weight: bold;
-  color: #e6e6e6;
+  color: #e5e5ff;
 }
 .button:active {
-  background-color: #fff;
-  color: #191919;
+  background-color: #5de95d;
+  color: #1a1a00;
+  border-color: #ff0;
 }
 .input {
   display: block;
@@ -31,10 +32,11 @@ body {
   height: 30px;
   margin: 10px;
   border-radius: 5px;
-  background-color: #000;
+  border: solid 2px #00f;
+  background-color: #ea62ea;
   font-size: 18px;
   font-weight: bold;
-  color: #e6e6e6;
+  color: #e5e5ff;
 }
 .container {
   position: relative;
@@ -70,15 +72,15 @@ body {
   box-sizing: border-box;
 }
 .checkbox:checked ~ .bg {
-  background-color: #000;
-  border-color: #000;
+  background-color: #ea62ea;
+  border-color: #8080ff;
 }
 .checkbox:checked ~ .control {
   transform: translateX(100%);
-  border-color: #000;
+  border-color: #8080ff;
 }
 input::-webkit-input-placeholder {
-  color: #808080;
+  color: #4d4dff;
   font-size: 16px;
 }
 /*# sourceMappingURL=style.css.map */
