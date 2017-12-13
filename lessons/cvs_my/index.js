@@ -36,17 +36,14 @@ function initCommand() {
             }
             panelMonitor.value += '\n>';
             break;
-        case 'git show':
-            break;
-        case 'git diff':
-            break;
         case 'git branch':
-            if (inputArray[2]) {
-                if (git.hasOwnProperty(inputArray[2])) {
-                    panelMonitor.value += '\n Branch ' + inputArray[2] + ' already exist in git' + '\n> ';
+            var newBranch = inputArray[2];
+            if (newBranch) {
+                if (git.hasOwnProperty(newBranch)) {
+                    panelMonitor.value += '\n Branch ' + newBranch + ' already exist in git' + '\n> ';
                 } else {
-                    git[inputArray[2]] = git[currentBranch].slice();
-                    panelMonitor.value += '\n Branch created: ' + inputArray[2] + '\n> ';
+                    git[newBranch] = git[currentBranch].slice();
+                    panelMonitor.value += '\n Branch created: ' + newBranch + '\n> ';
                 }
             } else {
                 panelMonitor.value += '\n Branch: ' + currentBranch + '\n> ';
@@ -57,13 +54,12 @@ function initCommand() {
             currentCommit = git[currentBranch].length - 1;
             panelMonitor.value += '\n Checkout to: ' + currentBranch + '\n> ';
             break;
-        case 'git cherry-pick':
-            break;
         case 'git merge':
-            if (inputArray[2] && git.hasOwnProperty(inputArray[2])) {
-                git[inputArray[2]] = git[currentBranch].concat(git[inputArray[2]]);
-                panelMonitor.value += '\n Branch ' + currentBranch + ' merged to ' + inputArray[2] + '\n> ';
-                currentBranch = inputArray[2];
+            var mergeBranch = inputArray[2];
+            if (mergeBranch && git.hasOwnProperty(mergeBranch)) {
+                git[mergeBranch] = git[currentBranch].concat(git[mergeBranch]);
+                panelMonitor.value += '\n Branch ' + currentBranch + ' merged to ' + mergeBranch + '\n> ';
+                currentBranch = mergeBranch;
                 currentCommit = git[currentBranch].length - 1;
             } else {
                 panelMonitor.value += '\n choose correct branch \n>';
@@ -90,13 +86,13 @@ function initCommand() {
     inputArray = [];
 }
 
+
 panelInput.addEventListener('keypress', function (event) {
     var key = event.which || event.keyCode;
     if (key === 13) {
         initCommand();
     }
 });
-
 
 panelButton.addEventListener('click', function () {
     initCommand();
