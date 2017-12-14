@@ -78,6 +78,7 @@ function initCommand() {
                 }
                 break;
             case 'merge':
+
                 break;
             case 'revert':
                 if (heads[currentBranch]) {
