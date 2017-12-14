@@ -15,28 +15,29 @@ body {
   height: 40px;
   width: 80px;
   border-radius: 5px;
-  border: solid 2px #00f;
-  background-color: #a216a2;
+  border: solid 2px #000;
+  background-color: #a37000;
   font-size: 18px;
   font-weight: bold;
-  color: #e5e5ff;
+  color: #e6e6e6;
 }
 .button:active {
-  background-color: #5de95d;
-  color: #1a1a00;
-  border-color: #ff0;
+  background-color: #5c8fff;
+  color: #191919;
+  border-color: #fff;
 }
 .input {
   display: block;
   width: 100%;
   height: 30px;
   margin: 10px;
+  padding: 5px;
   border-radius: 5px;
-  border: solid 2px #00f;
-  background-color: #ea62ea;
+  border: solid 2px #000;
+  background-color: #ffbb26;
   font-size: 18px;
   font-weight: bold;
-  color: #e5e5ff;
+  color: #e6e6e6;
 }
 .container {
   position: relative;
@@ -72,15 +73,15 @@ body {
   box-sizing: border-box;
 }
 .checkbox:checked ~ .bg {
-  background-color: #ea62ea;
-  border-color: #8080ff;
+  background-color: #ffbb26;
+  border-color: #808080;
 }
 .checkbox:checked ~ .control {
   transform: translateX(100%);
-  border-color: #8080ff;
+  border-color: #808080;
 }
 input::-webkit-input-placeholder {
-  color: #4d4dff;
+  color: #4d4d4d;
   font-size: 16px;
 }
 /*# sourceMappingURL=style.css.map */
