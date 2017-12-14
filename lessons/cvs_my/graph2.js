@@ -97,6 +97,7 @@ function initCommand() {
                 panelMonitor.value += '\n git: ' + inputArray[1] + ' is not a git command. \n> ';
         }
     }
+
     else {
         inputValue ? panelMonitor.value += '\n ' + inputValue + ': command not found \n> ' : panelMonitor.value += '\n> ';
     }
