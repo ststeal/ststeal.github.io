@@ -24,6 +24,16 @@ function createCommit() {
     commits[commit.id] = commit;
 }
 
+function merge(mergedBranch) {
+    var commit = {
+        id: getHash()
+    };
+    commit.parent = [];
+    commit.parent.push(heads[currentBranch], heads[mergedBranch]);
+    heads[currentBranch] = commit.id;
+    commits[commit.id] = commit;
+}
+
 function getHash() {
     return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(10, 10)));
 }
@@ -78,7 +88,8 @@ function initCommand() {
                 }
                 break;
             case 'merge':
-
+                merge(inputArray[2]);
+                panelMonitor.value += '\n ' + inputArray[2] + ' merged to ' + currentBranch + ' \n> ';
                 break;
             case 'revert':
                 if (heads[currentBranch]) {
