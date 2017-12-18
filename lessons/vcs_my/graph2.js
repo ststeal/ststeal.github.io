@@ -144,6 +144,7 @@ function initCommand() {
                 panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
                 break;
             default:
+
                 panelMonitor.value += '\n Git: ' + command + ' is not a git command. \n> ';
         }
     } else {
