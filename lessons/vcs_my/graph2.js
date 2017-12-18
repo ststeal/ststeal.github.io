@@ -58,7 +58,8 @@ function branch(branchName) {
 
 function merge(mergedBranch) {
     var commit = {
-        id: getHash()
+        id: getHash(),
+        branch: mergedBranch
     };
     commit.parent1 = heads[currentBranch];
     commit.parent2 = heads[mergedBranch];
@@ -89,6 +90,10 @@ function revert() {
     }
 }
 
+function rebase(branchName) {
+
+}
+
 function log() {
     for (var i = 0; i < 3; i++) {
         var currentCommit;
@@ -106,7 +111,12 @@ function log() {
             panelMonitor.value += '\n nothing commited \n>';
             break;
         }
-        panelMonitor.value += '\n ' + currentCommit.id;
+        if (currentCommit.parent2) {
+            panelMonitor.value += '\n Merge branch ' + currentCommit.branch;
+            break;
+        } else {
+            panelMonitor.value += '\n ' + currentCommit.id;
+        }
     }
 }
 
@@ -138,13 +148,13 @@ function initCommand() {
                 revert();
                 break;
             case 'rebase':
+                rebase();
                 break;
 
             case undefined:
                 panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
                 break;
             default:
-
                 panelMonitor.value += '\n Git: ' + command + ' is not a git command. \n> ';
         }
     } else {
