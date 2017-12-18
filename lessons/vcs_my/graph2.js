@@ -139,6 +139,7 @@ function initCommand() {
                 break;
             case 'rebase':
                 break;
+
             case undefined:
                 panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
                 break;
