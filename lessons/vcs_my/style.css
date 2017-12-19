@@ -39,7 +39,7 @@ html,body{
     margin-top: 20px;
 }
 
-.panel__controls__input{
+.panel__controls-input{
     width: 100%;
     padding: 5px;
     background-color: #2D2E28;
@@ -49,12 +49,12 @@ html,body{
     font-size: 16px;
 }
 
-.panel__controls__input:focus {
+.panel__controls-input:focus {
     outline: none;
     border: solid 2px #3F1C2F;
 }
 
-.panel__controls__button{
+.panel__controls-button{
     min-width: 100px;
     margin-left: 20px;
     background-color: #2D2E28;
@@ -64,7 +64,7 @@ html,body{
     font-size: 16px;
 }
 
-.panel__controls__button:active{
+.panel__controls-button:active{
     border: solid 2px #3F1C2F;
     outline: none;
 }

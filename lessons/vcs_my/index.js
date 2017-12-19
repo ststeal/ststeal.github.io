@@ -1,8 +1,8 @@
 /*global console */
 
 var panelMonitor = document.querySelector('.panel__monitor');
-var panelInput = document.querySelector('.panel__controls__input');
-var panelButton = document.querySelector('.panel__controls__button');
+var panelInput = document.querySelector('.panel__controls-input');
+var panelButton = document.querySelector('.panel__controls-button');
 var git = {};
 var inputArray = [];
 var currentBranch;

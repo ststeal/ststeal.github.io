@@ -1,27 +1,38 @@
-/*global console */
-
 var panelMonitor = document.querySelector('.panel__monitor');
-var panelInput = document.querySelector('.panel__controls__input');
-var panelButton = document.querySelector('.panel__controls__button');
-var inputArray = [];
+var panelInput = document.querySelector('.panel__controls-input');
+var panelButton = document.querySelector('.panel__controls-button');
 var heads = {};
 var currentBranch;
 var commits = {};
 var inputValue, git, command, aim;
+var commands = {
+    commit: commit,
+    log: log,
+    checkout: checkout,
+    merge: merge,
+    rebase: rebase,
+    revert: revert,
+    branch: branch
+};
+
+function output(str) {
+    panelMonitor.value += '\n ' + str + '\n> ';
+    panelMonitor.scrollTop = panelMonitor.scrollHeight;
+}
 
 function inputComputed(input) {
     inputValue = input;
     panelMonitor.value += inputValue;
-    inputArray = inputValue.split(' ');
+    var inputArray = inputValue.split(' ');
     git = inputArray[0];
-    command = inputArray[1];
+    command = inputArray[1] || '';
     aim = inputArray[2];
     panelInput.value = '';
 }
 
 function createCommit() {
     if (!heads.hasOwnProperty('master')) {
-        heads.master = '';
+        heads.master = null;
         currentBranch = 'master';
     }
     var commit = {
@@ -39,7 +50,7 @@ function removeCommit(id) {
 }
 
 function getHash() {
-    return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(10, 10)));
+    return Math.random().toString(36).slice(2, 2 + Math.max(1, 10));
 }
 
 function commit() {
@@ -59,7 +70,7 @@ function branch(branchName) {
         if (currentBranch) {
             panelMonitor.value += '\n Branch: ' + currentBranch + '\n> ';
         } else {
-            panelMonitor.value += '\n Git haven\'t any branch' + '\n> ';
+            output('Git haven\'t any branch');
         }
     }
 }
@@ -85,7 +96,7 @@ function merge(branchName) {
     commit.parent2 = heads[branchName];
     heads[currentBranch] = commit;
     commits[commit.id] = commit;
-    panelMonitor.value += '\n ' + branchName + ' merged to ' + currentBranch + ' \n> ';
+    output(branchName + ' merged to ' + currentBranch);
 }
 
 function checkout(branchName) {
@@ -157,79 +168,85 @@ function rebase(branchName) {
 }
 
 function log() {
-    for (var i = 0; i < 3; i++) {
-        var currentCommit;
-        if (currentBranch) {
-            if (i === 0) {
-                currentCommit = heads[currentBranch];
-            } else {
-                currentCommit = currentCommit.parent1;
-                if (!currentCommit) {
-                    panelMonitor.value += '\n> ';
-                    break;
-                }
-            }
-        } else {
-            panelMonitor.value += '\n nothing commited \n>';
-            break;
-        }
+    if (!currentBranch) {
+        output('nothing commited');
+        return;
+    }
+
+    var commitsList = [];
+    for (var i = 0, currentCommit = heads[currentBranch]; i < 8 && currentCommit; i++, currentCommit = currentCommit.parent1) {
         if (currentCommit.parent2) {
-            panelMonitor.value += '\n Merge branch ' + currentCommit.branch;
+            commitsList.push('Merge branch ' + currentCommit.branch);
             break;
         } else {
-            panelMonitor.value += '\n ' + currentCommit.id;
+            commitsList.push(currentCommit.id);
         }
     }
+    output(commitsList.join('\n '));
 }
 
 
-function initCommand() {
+function processCommand() {
     inputComputed(panelInput.value);
-    if (git === 'git') {
-        switch (command) {
-            case 'commit':
-                commit();
-                break;
-            case 'log':
-                log();
-                break;
-            case 'branch':
-                branch(aim);
-                break;
-            case 'checkout':
-                checkout(aim);
-                break;
-            case 'merge':
-                merge(aim);
-                break;
-            case 'revert':
-                revert();
-                break;
-            case 'rebase':
-                rebase(aim);
-                break;
+    if (git !== 'git') {
+        // (inputValue ? panelMonitor.value += '\n ' + inputValue + ': command not found \n> ' : panelMonitor.value += '\n> ');
 
-            case undefined:
-                panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
-                break;
-            default:
-                panelMonitor.value += '\n Git: ' + command + ' is not a git command. \n> ';
-        }
-    } else {
-        inputValue ? panelMonitor.value += '\n ' + inputValue + ': command not found \n> ' : panelMonitor.value += '\n> ';
+        // if (inputValue) {
+        //     panelMonitor.value += '\n ' + inputValue + ': command not found \n> ';
+        // } else {
+        //     panelMonitor.value += '\n> ';
+        // }
+
+        panelMonitor.value += inputValue ?
+            ('\n ' + inputValue + ': command not found \n> ') :
+            '\n> ';
+
+        return;
     }
-    panelMonitor.scrollTop = 99999;
-    inputArray = [];
+    if (commands.hasOwnProperty(command)) {
+        commands[command]();
+    } else {
+        output('My git support commands: commit/log/branch/checkout/merge/revert/rebase');
+        // panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
+        // panelMonitor.value += '\n Git: ' + command + ' is not a git command. \n> ';
+    }
+    // switch (command) {
+    //     case 'commit':
+    //         commit();
+    //         break;
+    //     case 'log':
+    //         log();
+    //         break;
+    //     case 'branch':
+    //         branch(aim);
+    //         break;
+    //     case 'checkout':
+    //         checkout(aim);
+    //         break;
+    //     case 'merge':
+    //         merge(aim);
+    //         break;
+    //     case 'revert':
+    //         revert();
+    //         break;
+    //     case 'rebase':
+    //         rebase(aim);
+    //         break;
+    //
+    //     case '':
+    //         panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
+    //         break;
+    //     default:
+    //         panelMonitor.value += '\n Git: ' + command + ' is not a git command. \n> ';
+    // }
 }
 
 
 panelInput.addEventListener('keypress', function (event) {
     var key = event.which || event.keyCode;
     if (key === 13) {
-        initCommand();
+        processCommand();
     }
 });
 
-panelButton.addEventListener('click', function () {
-    initCommand();
-});
+panelButton.addEventListener('click', processCommand);
