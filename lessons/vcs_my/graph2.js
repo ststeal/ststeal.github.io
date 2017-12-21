@@ -148,7 +148,7 @@ function merge(branchName) {
 
 function rebase(branchName) {
     if (!branchName) {
-        panelMonitor.value += '\n Please choose branch \n> ';
+        output('Please choose branch');
         return;
     }
     var ontoBranchCommits = new Set();
@@ -176,11 +176,12 @@ function rebase(branchName) {
 
 
 function processCommand() {
-    if (!panelInput.value) {
+    var panelInputValue = panelInput.value;
+    if (!panelInputValue) {
         output();
         return;
     }
-    parsedInputValue = inputParse(panelInput.value);
+    parsedInputValue = inputParse(panelInputValue);
     if (parsedInputValue.vcs !== 'git') {
         output(parsedInputValue.vcs + ': command not found');
         return;
