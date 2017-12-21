@@ -1,48 +1,41 @@
+/*global Set*/
+
 var panelMonitor = document.querySelector('.panel__monitor');
 var panelInput = document.querySelector('.panel__controls-input');
 var panelButton = document.querySelector('.panel__controls-button');
-var heads = {};
-var currentBranch;
-var commits = {};
-var inputValue, git, command, aim;
-var commands = {
-    commit: commit,
-    log: log,
-    checkout: checkout,
-    merge: merge,
-    rebase: rebase,
-    revert: revert,
-    branch: branch
-};
+var parsedInputValue;
+var currentBranch = 'master',
+    commits = {},
+    heads = {
+        master: null
+    },
+    commands = {
+        commit: commit,
+        log: log,
+        checkout: checkout,
+        merge: merge,
+        rebase: rebase,
+        revert: revert,
+        branch: branch
+    };
+
+function inputParse(input) {
+    var parsedInput = input.split(' ');
+    return {
+        vcs: parsedInput[0] || '',
+        command: parsedInput[1] || '',
+        aim: parsedInput[2] || ''
+    };
+}
 
 function output(str) {
+    if (!str) {
+        str = '';
+    }
+    panelMonitor.value += panelInput.value;
+    panelInput.value = '';
     panelMonitor.value += '\n ' + str + '\n> ';
     panelMonitor.scrollTop = panelMonitor.scrollHeight;
-}
-
-function inputComputed(input) {
-    inputValue = input;
-    panelMonitor.value += inputValue;
-    var inputArray = inputValue.split(' ');
-    git = inputArray[0];
-    command = inputArray[1] || '';
-    aim = inputArray[2];
-    panelInput.value = '';
-}
-
-function createCommit() {
-    if (!heads.hasOwnProperty('master')) {
-        heads.master = null;
-        currentBranch = 'master';
-    }
-    var commit = {
-        id: getHash()
-    };
-    if (heads[currentBranch]) {
-        commit.parent1 = heads[currentBranch];
-    }
-    heads[currentBranch] = commit;
-    commits[commit.id] = commit;
 }
 
 function removeCommit(id) {
@@ -55,89 +48,103 @@ function getHash() {
 
 function commit() {
     createCommit();
-    panelMonitor.value += '\n commited: [' + currentBranch + ' ' + heads[currentBranch].id + '] \n> ';
+    output('commited: [' + currentBranch + ' ' + heads[currentBranch].id + ']');
 }
 
 function branch(branchName) {
-    if (branchName) {
-        if (heads[branchName]) {
-            panelMonitor.value += '\n Branch ' + branchName + ' already exist in git' + '\n> ';
-        } else {
-            heads[branchName] = heads[currentBranch];
-            panelMonitor.value += '\n Branch created: ' + branchName + '\n> ';
-        }
-    } else {
-        if (currentBranch) {
-            panelMonitor.value += '\n Branch: ' + currentBranch + '\n> ';
-        } else {
-            output('Git haven\'t any branch');
-        }
+    var branchLog;
+    if (heads.master === null) {
+        output('*master');
+        return;
     }
-}
-
-function merge(branchName) {
     if (!branchName) {
-        panelMonitor.value += '\n Please choose branch \n> ';
-        return;
+        branchLog = [];
+        for (const key in heads) {
+            if (heads.hasOwnProperty(key)) {
+                branchLog.push(key === currentBranch ? '*' + key : key);
+            }
+        }
+        branchLog = branchLog.join('\n ');
+    } else if (heads.hasOwnProperty(branchName)) {
+        branchLog = 'Branch ' + branchName + ' already exist in git';
+    } else {
+        heads[branchName] = heads[currentBranch];
+        branchLog = 'Branch created: ' + branchName;
     }
-    if (!currentBranch) {
-        panelMonitor.value += '\n You haven\'t any branch \n> ';
-        return;
-    }
-    if (!heads.hasOwnProperty(branchName)) {
-        panelMonitor.value += '\n This branch doesn\'t exist on git \n> ';
-        return;
-    }
-    var commit = {
-        id: getHash(),
-        branch: branchName
-    };
-    commit.parent1 = heads[currentBranch];
-    commit.parent2 = heads[branchName];
-    heads[currentBranch] = commit;
-    commits[commit.id] = commit;
-    output(branchName + ' merged to ' + currentBranch);
+    output(branchLog);
 }
 
 function checkout(branchName) {
     if (branchName) {
-        if (heads[branchName]) {
+        if (heads.hasOwnProperty(branchName)) {
             currentBranch = branchName;
-            panelMonitor.value += '\n Checkout to: ' + currentBranch + '\n> ';
+            output('Checkout to: ' + currentBranch);
         } else {
-            panelMonitor.value += '\n Branch ' + branchName + ' doesn\'t exist in git' + '\n> ';
+            output('Branch ' + branchName + ' doesn\'t exist in git');
         }
     } else {
-        panelMonitor.value += '\n Please choose branch' + '\n> ';
+        output('Please choose branch');
     }
 }
 
 function revert() {
-    if (heads[currentBranch]) {
-        panelMonitor.value += '\n Reverted: [' + currentBranch + ' ' + heads[currentBranch] + ']\n>';
+    if (heads.hasOwnProperty(currentBranch)) {
+        output('Reverted: [' + currentBranch + ' ' + heads[currentBranch] + ']');
         heads[currentBranch] = commits[heads[currentBranch]].parent1;
     } else {
-        panelMonitor.value += '\n Nothing to revert \n>';
+        output('Nothing to revert');
     }
 }
 
-// function rebase(branchName) {
-//     rebasedBranchCommits = new Set();
-//     var currentCommit = heads[currentBranch];
-//     do {
-//         rebasedBranchCommits.add(currentCommit);
-//         currentCommit = currentCommit.parent1;
-//     } while (currentCommit);
-//     currentCommit = heads[branchName];
-//     var counter = 0;
-//     while (!rebasedBranchCommits.has(currentCommit)) {
-//         removeCommit(currentCommit.id);
-//         currentCommit = currentCommit.parent1;
-//         console.log(counter++);
-//     }
-//     console.log(currentCommit);
-//     console.log(rebasedBranchCommits);
-// }
+function log() {
+    if (!currentBranch) {
+        output('nothing commited');
+        return;
+    }
+
+    var commitsList = [];
+    for (var i = 0, currentCommit = heads[currentBranch]; i < 8 && currentCommit; i++, currentCommit = currentCommit.parent1) {
+        if (currentCommit.parent2) {
+            commitsList.push('Merge branch ' + currentCommit.branch);
+            break;
+        } else {
+            commitsList.push(currentCommit.id);
+        }
+    }
+    output(commitsList.join('\n '));
+}
+
+function createCommit() {
+    var commit = {
+        id: getHash(),
+        parent1: heads[currentBranch] || null
+    };
+    heads[currentBranch] = commit;
+    commits[commit.id] = commit;
+}
+
+function createMergeCommit(mergeBranch) {
+    var commit = {
+        id: getHash(),
+        parent1: heads[currentBranch] || null,
+        parent2: heads[mergeBranch] || null
+    };
+    heads[currentBranch] = commit;
+    commits[commit.id] = commit;
+}
+
+function merge(branchName) {
+    if (!branchName) {
+        output('Please choose branch');
+        return;
+    }
+    if (!heads.hasOwnProperty(branchName)) {
+        output(branchName + ' doesn\'t exist in git');
+        return;
+    }
+    createMergeCommit(branchName);
+    output(branchName + ' merged to ' + currentBranch);
+}
 
 function rebase(branchName) {
     if (!branchName) {
@@ -164,81 +171,25 @@ function rebase(branchName) {
         createCommit();
     }
     console.log(heads);
-    panelMonitor.value += '\n ' + currentBranch + ' rebase onto ' + branchName + ' \n> ';
-}
-
-function log() {
-    if (!currentBranch) {
-        output('nothing commited');
-        return;
-    }
-
-    var commitsList = [];
-    for (var i = 0, currentCommit = heads[currentBranch]; i < 8 && currentCommit; i++, currentCommit = currentCommit.parent1) {
-        if (currentCommit.parent2) {
-            commitsList.push('Merge branch ' + currentCommit.branch);
-            break;
-        } else {
-            commitsList.push(currentCommit.id);
-        }
-    }
-    output(commitsList.join('\n '));
+    output(currentBranch + ' rebase onto ' + branchName);
 }
 
 
 function processCommand() {
-    inputComputed(panelInput.value);
-    if (git !== 'git') {
-        // (inputValue ? panelMonitor.value += '\n ' + inputValue + ': command not found \n> ' : panelMonitor.value += '\n> ');
-
-        // if (inputValue) {
-        //     panelMonitor.value += '\n ' + inputValue + ': command not found \n> ';
-        // } else {
-        //     panelMonitor.value += '\n> ';
-        // }
-
-        panelMonitor.value += inputValue ?
-            ('\n ' + inputValue + ': command not found \n> ') :
-            '\n> ';
-
+    if (!panelInput.value) {
+        output();
         return;
     }
-    if (commands.hasOwnProperty(command)) {
-        commands[command]();
+    parsedInputValue = inputParse(panelInput.value);
+    if (parsedInputValue.vcs !== 'git') {
+        output(parsedInputValue.vcs + ': command not found');
+        return;
+    }
+    if (commands.hasOwnProperty(parsedInputValue.command)) {
+        commands[parsedInputValue.command](parsedInputValue.aim);
     } else {
         output('My git support commands: commit/log/branch/checkout/merge/revert/rebase');
-        // panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
-        // panelMonitor.value += '\n Git: ' + command + ' is not a git command. \n> ';
     }
-    // switch (command) {
-    //     case 'commit':
-    //         commit();
-    //         break;
-    //     case 'log':
-    //         log();
-    //         break;
-    //     case 'branch':
-    //         branch(aim);
-    //         break;
-    //     case 'checkout':
-    //         checkout(aim);
-    //         break;
-    //     case 'merge':
-    //         merge(aim);
-    //         break;
-    //     case 'revert':
-    //         revert();
-    //         break;
-    //     case 'rebase':
-    //         rebase(aim);
-    //         break;
-    //
-    //     case '':
-    //         panelMonitor.value += '\n My git support commands: commit/log/branch/checkout/merge/revert/rebase \n> ';
-    //         break;
-    //     default:
-    //         panelMonitor.value += '\n Git: ' + command + ' is not a git command. \n> ';
-    // }
 }
 
 
