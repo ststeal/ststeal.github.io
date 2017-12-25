@@ -37,9 +37,6 @@ function output(str) {
     panelMonitor.scrollTop = panelMonitor.scrollHeight;
 }
 
-function removeCommit(id) {
-    delete commits[id];
-}
 
 function getHash() {
     return Math.random().toString(36).slice(2, 2 + Math.max(1, 10));
@@ -152,6 +149,10 @@ function merge(branchName) {
     output(branchName + ' merged to ' + currentBranch);
 }
 
+// function removeCommit(id) {
+//     delete commits[id];
+// }
+
 function rebase(branchName) {
     if (testBranch(branchName)) {
         return;
@@ -172,50 +173,20 @@ function rebase(branchName) {
         currentCommit = currentCommit.parent1;
         counter++;
     }
+
     if (currentCommit === heads[branchName]) {
         output(currentBranch + ' is already up-to-date');
         return;
     }
+
     heads[currentBranch] = heads[branchName];
     for (var i = 0; i < counter; i++) {
-        removeCommit(currentCommit.id);
+        // removeCommit(currentCommit.id);
         createCommit();
     }
 
     output(currentBranch + ' rebase onto ' + branchName);
 }
-
-
-// function rebase(branchName) {
-//     if (!branchName) {
-//         output('Please choose branch');
-//         return;
-//     }
-//     if (!heads.hasOwnProperty(branchName)) {
-//         output(branchName + ' doesn\'t exist in git');
-//         return;
-//     }
-//
-//     var ontoBranchCommits = new Set();
-//     var currentCommit = heads[branchName];
-//     var counter = 0;
-//     while (currentCommit) {
-//         ontoBranchCommits.add(currentCommit);
-//         currentCommit = currentCommit.parent1;
-//     }
-//     currentCommit = heads[currentBranch];
-//     heads[currentBranch] = heads[branchName];
-//     while (!ontoBranchCommits.has(currentCommit)) {
-//         removeCommit(currentCommit.id);
-//         counter++;
-//         currentCommit = currentCommit.parent1;
-//     }
-//     for (var i = 0; i < counter; i++) {
-//         createCommit();
-//     }
-//     console.log(heads);
-//     output(currentBranch + ' rebase onto ' + branchName);
-// }
 
 
 function processCommand() {
