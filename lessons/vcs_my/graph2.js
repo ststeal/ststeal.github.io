@@ -1,4 +1,4 @@
-/*global Set*/
+/*global Set,rect*/
 
 var panelMonitor = document.querySelector('.panel__monitor');
 var panelInput = document.querySelector('.panel__controls-input');
@@ -17,8 +17,17 @@ var currentBranch = 'master',
         rebase: rebase,
         revert: revert,
         branch: branch
+    },
+    d3jsData = {
+        nodes: [],
+        links: []
     };
 
+/**
+ * Парсинг вводимой команды
+ * @param {string} input Введенная строка
+ * @returns {object} Распаршеная строка
+ * */
 function inputParse(input) {
     var parsedInput = input.split(' ');
     return {
@@ -28,20 +37,38 @@ function inputParse(input) {
     };
 }
 
+/**
+ * Вывод вводимой команды в консоль
+ * @param {string} commandString Введенная строка
+ * */
+function outputCommand(commandString) {
+    panelMonitor.value += commandString;
+}
+
+/**
+ * Текстовый вывод результата команды
+ * @param {string} str Результат операции
+ * */
 function output(str) {
     if (!str) {
         str = '';
     }
-    panelMonitor.value += panelInput.value;
     panelMonitor.value += '\n ' + str + '\n> ';
     panelMonitor.scrollTop = panelMonitor.scrollHeight;
 }
 
-
+/**
+ * Генерация рандомного хеша коммита
+ * @return {string} рандомный хеш коммита
+ * */
 function getHash() {
     return Math.random().toString(36).slice(2, 2 + Math.max(1, 10));
 }
 
+/**
+ * Создание коммита с двумя родителями (мерж-коммит)
+ * @param {string} mergeBranch Ветка для мержа
+ * */
 function createMergeCommit(mergeBranch) {
     var commit = {
         id: getHash(),
@@ -52,6 +79,9 @@ function createMergeCommit(mergeBranch) {
     commits[commit.id] = commit;
 }
 
+/**
+ * Создание коммита с одним родителем
+ * */
 function createCommit() {
     var commit = {
         id: getHash(),
@@ -61,16 +91,23 @@ function createCommit() {
     commits[commit.id] = commit;
 }
 
+/**
+ * Создание коммита с одним родителем и вывод в консоль результата
+ * */
 function commit() {
     createCommit();
     output('Commited: [' + currentBranch + ' ' + heads[currentBranch].id + ']');
 }
 
+/**
+ * Создание новой ветки
+ * @param {string} branchName Имя новой ветки
+ * */
 function branch(branchName) {
     var branchLog;
     if (!branchName) {
         branchLog = [];
-        for (const key in heads) {
+        for (var key in heads) {
             if (heads.hasOwnProperty(key)) {
                 branchLog.push(key === currentBranch ? '*' + key : key);
             }
@@ -85,6 +122,10 @@ function branch(branchName) {
     output(branchLog);
 }
 
+/**
+ * Извлечение указанной ветки
+ * @param {string} branchName Имя новой ветки
+ * */
 function checkout(branchName) {
     if (branchName) {
         if (heads.hasOwnProperty(branchName)) {
@@ -98,25 +139,25 @@ function checkout(branchName) {
     }
 }
 
-function revert() {
-    if (heads.hasOwnProperty(currentBranch)) {
-        output('Reverted: [' + currentBranch + ' ' + heads[currentBranch] + ']');
-        heads[currentBranch] = commits[heads[currentBranch]].parent1;
-    } else {
-        output('Nothing to revert');
-    }
+/**
+ * Реверт коммита
+ * @param {string} hash Хэш коммита который нужно ревертнуть
+ * */
+function revert(hash) {
+    createCommit();
+    output('Reverted: ' + hash);
 }
 
+/**
+ * Вывод гит-истории текущей ветки
+ * @param {number} quantity Кол-во коммитов для вывода
+ * @param {string} commit Коммит, до которого выводить лог
+ * */
 function log() {
-    if (!currentBranch) {
-        output('nothing commited');
-        return;
-    }
-
     var commitsList = [];
     for (var i = 0, currentCommit = heads[currentBranch]; i < 8 && currentCommit; i++, currentCommit = currentCommit.parent1) {
         if (currentCommit.parent2) {
-            commitsList.push('Merge branch ' + currentCommit.branch);
+            commitsList.push('Merge branch ' + currentCommit);
             break;
         } else {
             commitsList.push(currentCommit.id);
@@ -125,6 +166,11 @@ function log() {
     output(commitsList.join('\n '));
 }
 
+/**
+ * Проверка есть ли ветка в гите, находимся ли мы в той же ветке, и передана ли вообще ветка в ф-цию
+ * @param {string} branch Проверяемая ветка
+ * @return {boolean} результат проверки
+ * */
 function testBranch(branch) {
     if (!branch) {
         output('Please choose branch');
@@ -138,8 +184,13 @@ function testBranch(branch) {
         output(branch + ' is current branch');
         return true;
     }
+    return false;
 }
 
+/**
+ * Создание мерж-коммита и вывод результата в консоль
+ * @param {string} branchName Имя ветки для мержа
+ * */
 function merge(branchName) {
     if (testBranch(branchName)) {
         return;
@@ -149,10 +200,10 @@ function merge(branchName) {
     output(branchName + ' merged to ' + currentBranch);
 }
 
-// function removeCommit(id) {
-//     delete commits[id];
-// }
-
+/**
+ * Ребейз ветки на основе выбранной
+ * @param {string} branchName Имя ветки для ребейза
+ * */
 function rebase(branchName) {
     if (testBranch(branchName)) {
         return;
@@ -181,16 +232,18 @@ function rebase(branchName) {
 
     heads[currentBranch] = heads[branchName];
     for (var i = 0; i < counter; i++) {
-        // removeCommit(currentCommit.id);
         createCommit();
     }
 
     output(currentBranch + ' rebase onto ' + branchName);
 }
 
-
+/**
+ * Обработка введенной в инпут команды
+ * */
 function processCommand() {
     var panelInputValue = panelInput.value;
+    outputCommand(panelInputValue);
     if (!panelInputValue) {
         output();
         return;
@@ -203,6 +256,10 @@ function processCommand() {
     }
     if (commands.hasOwnProperty(parsedInputValue.command)) {
         commands[parsedInputValue.command](parsedInputValue.aim);
+        getd3jsData(commits);
+        // if (d3jsData.links.length !== 0) {
+        //     rect();
+        // }
     } else {
         output('My git support commands: commit/log/branch/checkout/merge/revert/rebase');
     }
@@ -218,3 +275,31 @@ panelInput.addEventListener('keypress', function (event) {
 });
 
 panelButton.addEventListener('click', processCommand);
+
+function getd3jsData(commits) {
+    d3jsData.nodes = [];
+    d3jsData.links = [];
+    getNodes(commits);
+    getLinks(commits);
+}
+
+function getLinks(data) {
+    for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+            var commit = data[key];
+            if (commit.parent1) {
+                d3jsData.links.push({source: commit.id, target: commit.parent1.id, value: 2});
+            }
+            if (commit.parent2) {
+                d3jsData.links.push({source: commit.id, target: commit.parent2.id, value: 2});
+            }
+        }
+    }
+}
+
+
+function getNodes(data) {
+    for (var key in data) {
+        d3jsData.nodes.push({id: data[key].id, group: 1});
+    }
+}

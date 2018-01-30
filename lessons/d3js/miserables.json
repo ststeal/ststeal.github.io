@@ -1,0 +1,37 @@
+{
+    "nodes": [
+        {
+            "id": "Myriel",
+            "group": 1
+        },
+        {
+            "id": "Napoleon",
+            "group": 1
+        },
+        {
+            "id": "Mlle.Baptistine",
+            "group": 1
+        },
+        {
+            "id": "Mme.Magloire",
+            "group": 1
+        }
+    ],
+    "links": [
+        {
+            "source": "Myriel",
+            "target": "Napoleon",
+            "value": 1
+        },
+        {
+            "source": "Napoleon",
+            "target": "Mlle.Baptistine",
+            "value": 4
+        },
+        {
+            "source": "Napoleon",
+            "target": "Mme.Magloire",
+            "value": 100
+        }
+    ]
+}
