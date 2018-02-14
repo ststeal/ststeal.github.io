@@ -1,4 +1,4 @@
-/*global Set,rect*/
+/*global Set*/
 
 var panelMonitor = document.querySelector('.panel__monitor');
 var panelInput = document.querySelector('.panel__controls-input');
@@ -22,6 +22,37 @@ var currentBranch = 'master',
         nodes: [],
         links: []
     };
+
+function uniqCommits(commit) {
+    if (commit.hasOwnProperty('parent2')) {
+        var primaryBranchCommits = new Set();
+        var secondaryBranchCommits = new Set();
+        var currentCommit = commit.parent1;
+        var generalCommit;
+        while (currentCommit) {
+            primaryBranchCommits.add(currentCommit);
+            currentCommit = currentCommit.parent1;
+        }
+        currentCommit = commit.parent2;
+        while (currentCommit && !primaryBranchCommits.has(currentCommit)) {
+            secondaryBranchCommits.add(currentCommit);
+            currentCommit = currentCommit.parent1;
+        }
+        generalCommit = currentCommit;
+        currentCommit = commit.parent1;
+        primaryBranchCommits = new Set();
+        console.log(primaryBranchCommits);
+        while (!(currentCommit === generalCommit)) {
+            primaryBranchCommits.add(currentCommit);
+            currentCommit = currentCommit.parent1;
+        }
+        return {
+            primary: primaryBranchCommits,
+            secondary: secondaryBranchCommits,
+            branchCommit: generalCommit
+        };
+    }
+}
 
 /**
  * Парсинг вводимой команды
@@ -156,8 +187,9 @@ function revert(hash) {
 function log() {
     var commitsList = [];
     for (var i = 0, currentCommit = heads[currentBranch]; i < 8 && currentCommit; i++, currentCommit = currentCommit.parent1) {
-        if (currentCommit.parent2) {
-            commitsList.push('Merge branch ' + currentCommit);
+        if (currentCommit.hasOwnProperty('parent2')) {
+            commitsList.push('Merge branch ' + currentCommit.id);
+            console.log(uniqCommits(currentCommit));
             break;
         } else {
             commitsList.push(currentCommit.id);
@@ -197,7 +229,7 @@ function merge(branchName) {
     }
 
     createMergeCommit(branchName);
-    output(branchName + ' merged to ' + currentBranch);
+    output(branchName + ' merged to ' + currentBranch + ': ' + heads[currentBranch].id);
 }
 
 /**
@@ -297,9 +329,24 @@ function getLinks(data) {
     }
 }
 
-
 function getNodes(data) {
     for (var key in data) {
         d3jsData.nodes.push({id: data[key].id, group: 1});
     }
 }
+
+commit();
+commit();
+branch('tst');
+commit();
+commit();
+checkout('tst');
+commit();
+commit();
+commit();
+commit();
+checkout('master');
+merge('tst');
+log();
+// output(uniqCommits(heads[currentBranch]));
+// console.log(uniqCommits(heads[currentBranch]));
