@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<div id="app">
+    <input type="text" @input="increment ($event.target.value)">
+    <p>{{value}}</p>
+    <p>{{doubleValue}}</p>
+</div>
+
+<script src="scripts/main-2.js"></script>
+
+</body>
+</html>

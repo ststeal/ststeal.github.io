@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<div id="app">
+    <button @click="show = !show">Click</button>
+    <p v-if="show">invisible text</p>
+    <p v-else="show"> {{ message | lowerCase | capitalize}} </p>
+    <ul>
+        <li v-for="(car,i) in cars">{{i+1}}-{{car.model}}, speed {{car.speed}}</li>
+    </ul>
+</div>
+
+<script src="scripts/main-4.js"></script>
+
+</body>
+</html>

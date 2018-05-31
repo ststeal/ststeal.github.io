@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<div id="app">
+    <span @mouseover="changeText">
+        Text
+    </span>
+    <p>{{title}}</p>
+    <p :class="styleCSS">colour: {{styleCSS}}</p>
+    <input type="text" @input="styleCSS = $event.target.value">
+</div>
+
+<script src="scripts/main.js"></script>
+
+</body>
+</html>
