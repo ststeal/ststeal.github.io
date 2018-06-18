@@ -1,11 +1,11 @@
-html,body{
+html, body {
     margin: 0;
     background-color: #525E54;
     font-family: Lucida Console, sans-serif;
     font-size: 16px;
 }
 
-.panel{
+.panel {
     display: flex;
     flex-wrap: wrap;
     width: 80%;
@@ -13,7 +13,7 @@ html,body{
     margin: 40px auto;
 }
 
-.panel__monitor{
+.panel__monitor {
     width: 100%;
     min-height: 600px;
     background-color: #2D2E28;
@@ -25,7 +25,7 @@ html,body{
     font-size: 14px;
 }
 
-.panel__monitor:focus{
+.panel__monitor:focus {
     outline: none;
 }
 
@@ -33,13 +33,13 @@ html,body{
     width: 0;
 }
 
-.panel__controls{
+.panel__controls {
     display: flex;
     width: 100%;
     margin-top: 20px;
 }
 
-.panel__controls-input{
+.panel__controls-input {
     width: 100%;
     padding: 5px;
     background-color: #2D2E28;
@@ -54,7 +54,7 @@ html,body{
     border: solid 2px #3F1C2F;
 }
 
-.panel__controls-button{
+.panel__controls-button {
     min-width: 100px;
     margin-left: 20px;
     background-color: #2D2E28;
@@ -64,7 +64,26 @@ html,body{
     font-size: 16px;
 }
 
-.panel__controls-button:active{
+.panel__controls-button:active {
     border: solid 2px #3F1C2F;
     outline: none;
+}
+
+.view{
+    width: 960px;
+    height: 600px;
+    display: block;
+    margin: auto;
+    background-color: #2D2E28;
+    border: solid 2px #CBCBCB;
+}
+
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+.nodes circle {
+    stroke: green;
+    stroke-width: 1.5px;
 }

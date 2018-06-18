@@ -256,10 +256,10 @@ function processCommand() {
     }
     if (commands.hasOwnProperty(parsedInputValue.command)) {
         commands[parsedInputValue.command](parsedInputValue.aim);
-        getd3jsData(commits);
-        // if (d3jsData.links.length !== 0) {
-        //     rect();
-        // }
+        getD3jsData(commits);
+        if (d3jsData.links.length !== 0) {
+            rect(d3jsData);
+        }
     } else {
         output('My git support commands: commit/log/branch/checkout/merge/revert/rebase');
     }
@@ -276,14 +276,14 @@ panelInput.addEventListener('keypress', function (event) {
 
 panelButton.addEventListener('click', processCommand);
 
-function getd3jsData(commits) {
+
+/**
+ * Парсинг данных для отрисовки графа
+ * @param {object} data Все коммиты
+ * */
+function getD3jsData(data) {
     d3jsData.nodes = [];
     d3jsData.links = [];
-    getNodes(commits);
-    getLinks(commits);
-}
-
-function getLinks(data) {
     for (var key in data) {
         if (data.hasOwnProperty(key)) {
             var commit = data[key];
@@ -293,13 +293,23 @@ function getLinks(data) {
             if (commit.parent2) {
                 d3jsData.links.push({source: commit.id, target: commit.parent2.id, value: 2});
             }
+            d3jsData.nodes.push({
+                id: data[key].id,
+                type: data[key].parent2 ? 'merge' : 'default'
+            });
         }
     }
 }
 
 
-function getNodes(data) {
-    for (var key in data) {
-        d3jsData.nodes.push({id: data[key].id, group: 1});
-    }
-}
+commit();
+commit();
+commit();
+branch('tst');
+commit();
+commit();
+checkout('tst');
+commit();
+commit();
+commit();
+

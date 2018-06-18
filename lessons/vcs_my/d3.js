@@ -1,38 +1,33 @@
 /* global d3,d3jsData */
 
-var svg = d3.select('svg'),
+var svg = d3.select('.view'),
     width = +svg.attr('width'),
     height = +svg.attr('height');
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
-
 var simulation = d3.forceSimulation()
     .force('link', d3.forceLink().id(function (d) {
         return d.id;
     }))
-    .force('charge', d3.forceManyBody())
-    .force('center', d3.forceCenter(width / 2, height / 2));
+    .force('charge', d3.forceManyBody().strength(10).distanceMax(400).distanceMin(200))
+    .force('center', d3.forceCenter(480, 300));
 
-function rect() {
-
+function rect(dataSet) {
+    svg.selectAll("*").remove();
     var link = svg.append('g')
         .attr('class', 'links')
         .selectAll('line')
-        .data(graph.links)
+        .data(dataSet.links)
         .enter().append('line')
-        .attr('stroke-width', function (d) {
-            return Math.sqrt(d.value);
-        });
+        .attr('stroke-width', 5);
 
     var node = svg.append('g')
         .attr('class', 'nodes')
         .selectAll('circle')
-        .data(graph.nodes)
+        .data(dataSet.nodes)
         .enter().append('circle')
-        .attr('r', 5)
-        .attr('fill', function (d) {
-            return color(d.group);
-        })
+        .attr('r', 7)
+        .attr('fill', 'blue')
         .call(d3.drag()
             .on('start', dragstarted)
             .on('drag', dragged)
@@ -44,11 +39,11 @@ function rect() {
         });
 
     simulation
-        .nodes(graph.nodes)
+        .nodes(dataSet.nodes)
         .on('tick', ticked);
 
     simulation.force('link')
-        .links(graph.links);
+        .links(dataSet.links);
 
     function ticked() {
         link
@@ -67,9 +62,11 @@ function rect() {
 
         node
             .attr('cx', function (d) {
+                console.log(d.x);
                 return d.x;
             })
             .attr('cy', function (d) {
+                console.log(d.y);
                 return d.y;
             });
     }
