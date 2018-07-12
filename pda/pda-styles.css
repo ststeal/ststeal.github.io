@@ -1,0 +1,193 @@
+html, body {
+    margin: 0;
+    font-family: YS Text, Helvetica Neue, Arial, sans-serif;
+    background-color: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.b-informers {
+    margin-top: 36px;
+    background-color: #FFFFFF;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.informers7__item {
+    vertical-align: initial;
+    border: 1px solid #dfdfdf;
+}
+
+.informers7__item-inner {
+    display: block;
+    padding: 10px 10px 10px 14px;
+}
+
+.informers7__item-title {
+    display: block;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.informers7__item-subinfo {
+    display: none;
+}
+
+.informers7__icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.informers7__item-data {
+    display: table-cell;
+    vertical-align: middle;
+    white-space: nowrap;
+    padding-top: 6px;
+}
+
+.informers7__item-text {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    line-height: 17px;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.informers7__item-num {
+    font-size: 18px;
+}
+
+.informers7__item_type_weather .informers7__item-description {
+    display: block;
+}
+
+.yandex__embedded-search {
+    margin: 0 10px 0 15px;
+}
+
+.informers__icon__weather_bkn_d {
+    width: 36px;
+    height: 36px;
+    margin-left: -2px;
+    background-image: url("pda-images/bkn-minus-ra-d.png");
+}
+
+.informers__icon__traffic_rd {
+    width: 28px;
+    height: 24px;
+    background-image: url("pda-images/traffic-rd.png");
+}
+
+.informers__icon__mail {
+    width: 24px;
+    height: 18px;
+    background-image: url("pda-images/mail.png");
+}
+
+.block {
+    border-top: 1px solid #dfdfdf;
+    margin-top: 10px;
+    font-size: 14px;
+    background-color: #FFFFFF;
+}
+
+.block__title-text {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    padding: 14px 22px 9px 22px;
+    color: #000;
+}
+
+.block__content-text {
+    font-size: 16px;
+    padding: 15px 22px 17px 22px;
+}
+
+.block__item {
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.block__item:nth-last-child(1) {
+    border-bottom: none;
+}
+
+
+
+
+
+.afisha__item{
+    padding: 15px 22px 17px 22px;
+}
+
+.afisha__cinema{
+    padding-right: 4px;
+}
+
+.afisha__promo{
+    font-weight: bold;
+}
+
+.afisha__description{
+    color: #989898;
+    padding-left: 4px;
+}
+
+.tv__item_time {
+    width: 42px;
+    padding: 14px 0 16px 22px;
+    vertical-align: top;
+    color: #989898;
+}
+
+.tv__item_name {
+
+}
+
+.tv__item_channel {
+    color: #989898;
+}
+
+.tv__item_description {
+    padding: 14px 6px 16px 6px;
+}
+
+.footer{
+    margin-top: 14px;
+}
+
+.footer__item{
+    margin: 9px 22px;
+    text-align: center;
+    line-height: 44px;
+    background-color: #FFFFFF;
+}
+
+.trademark{
+    color: rgba(0,0,0,.57);
+    text-align: center;
+    margin: 40px 0 33px 0;
+}
+
+.mlogo__container {
+    margin: 25px auto 10px;
+    text-align: center;
+}
+
+.mlogo_default {
+    margin: auto;
+    background-size: 94px 35px;
+    vertical-align: top;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 94px;
+    height: 35px;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='94' height='35' viewBox='0 0 94 35' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M12.042 2.851h-1.795a5.49 5.49 0 0 0-1.97.367 4.507 4.507 0 0 0-1.709 1.164c-.496.532-.897 1.237-1.204 2.114-.306.877-.46 1.962-.46 3.255 0 1.237.139 2.272.416 3.106.278.834.657 1.51 1.139 2.027a4.014 4.014 0 0 0 1.708 1.1c.656.215 1.35.322 2.08.322h1.795V2.851zM9.24 19.057l-5.343 11.78H0L5.868 18.24c-1.373-.688-2.482-1.698-3.328-3.03-.847-1.333-1.27-3.146-1.27-5.439 0-1.604.24-3.016.722-4.234s1.139-2.228 1.971-3.03A8.135 8.135 0 0 1 6.875.701 10.223 10.223 0 0 1 10.378.1h5.036v30.736h-3.372V19.057H9.24z' fill='%23F33'/%3E%3Cpath d='M88.498 31.134c-2.365 0-4.22-.924-5.562-2.772-1.343-1.849-2.014-4.636-2.014-8.362 0-1.69.168-3.223.504-4.6.335-1.375.831-2.542 1.489-3.503a6.97 6.97 0 0 1 2.452-2.235c.977-.53 2.108-.795 3.393-.795.992 0 1.796.107 2.409.322.613.215 1.167.48 1.664.795l-.482 3.181a7.455 7.455 0 0 0-1.642-1.083 4.459 4.459 0 0 0-1.993-.464c-1.226 0-2.233.677-3.02 2.031-.79 1.354-1.183 3.414-1.183 6.179 0 2.736.328 4.847.985 6.33.657 1.484 1.686 2.225 3.087 2.225.846 0 1.577-.14 2.19-.421.612-.28 1.123-.6 1.532-.955l.788 2.494a7.533 7.533 0 0 1-1.97 1.182c-.73.3-1.606.451-2.627.451zm-17.583-11.09v10.79H67.5V9.167h3.415v10.016l5.299-10.016h3.46L74.2 19.356l6.262 11.477h-3.723l-5.824-10.79zm-12.982-8.426c-1.051 0-1.796.58-2.233 1.741-.438 1.16-.716 2.715-.833 4.664h5.65c0-.917-.044-1.77-.132-2.558-.088-.788-.227-1.468-.416-2.042-.19-.573-.453-1.017-.788-1.332-.336-.315-.752-.473-1.248-.473zm6.13 17.754c-.7.545-1.504.974-2.408 1.29-.905.314-1.913.472-3.022.472-2.277 0-4.072-.866-5.386-2.6-1.313-1.734-1.97-4.278-1.97-7.63 0-1.749.124-3.354.372-4.816.248-1.461.642-2.729 1.182-3.804.54-1.075 1.233-1.913 2.08-2.515.847-.601 1.854-.902 3.022-.902.904 0 1.736.18 2.496.537.759.359 1.401.939 1.926 1.741.526.803.934 1.842 1.227 3.117.291 1.275.437 2.83.437 4.664v1.848h-9.195c0 2.465.342 4.328 1.029 5.589.685 1.261 1.714 1.891 3.087 1.891.963 0 1.817-.164 2.561-.494.745-.33 1.336-.652 1.774-.967l.788 2.579zM44.068 11.919h-3.81v.385c0 1.144-.022 2.395-.066 3.752a58.28 58.28 0 0 1-.284 4.138c-.147 1.4-.35 2.78-.613 4.137a19.915 19.915 0 0 1-1.095 3.751h5.868V11.92zM49.172 35h-3.065v-4.167H36.65V35h-3.066v-6.918h1.358c.496-1.146.89-2.414 1.182-3.804.292-1.39.518-2.823.679-4.299.16-1.476.263-2.98.306-4.514.044-1.532.066-3.016.066-4.449V9.168h10.247v18.914h1.751V35zM31.667 9.168v21.665h-3.372v-9.715h-5.08v9.715H19.8V9.168h3.416v9.2h5.08v-9.2h3.37z' fill='%23000'/%3E%3C/g%3E%3C/svg%3E");
+}
